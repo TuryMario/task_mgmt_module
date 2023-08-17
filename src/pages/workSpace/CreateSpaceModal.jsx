@@ -98,7 +98,7 @@ function CreateSpaceModal(props) {
       </Modal.Body>
       <Modal.Footer>
         <Button variant="outline-danger" onClick={props.onHide}>
-          Cancle
+          Cancel
         </Button>
               <Button variant="outline-success" onClick={() => {
                   console.log(data);
