@@ -1,15 +1,8 @@
 import React from "react";
 import { Container, Navbar } from "react-bootstrap";
 import CreateButton from "./CreateButton";
-import { useState } from "react";
 
-function WorkSpaceNavBar({btnData}) {
-  const [data, setData] = useState([]);
-
-  const handleData = (data) => {
-    setData(data);
-  };
-  btnData(data);
+function WorkSpaceNavBar() {
   return (
     <div>
       <Navbar className="bg-body-tertiary mb-4">
@@ -19,7 +12,7 @@ function WorkSpaceNavBar({btnData}) {
           </Navbar.Brand>
           <Navbar.Collapse className="justify-content-end">
             <Navbar.Text>
-              <CreateButton createData={handleData} />
+              <CreateButton/>
             </Navbar.Text>
           </Navbar.Collapse>
         </Container>

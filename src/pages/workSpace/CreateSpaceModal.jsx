@@ -1,24 +1,26 @@
-import React, { useState } from "react";
-import { FloatingLabel, Modal, Button, Card, Form, Row } from "react-bootstrap";
+import React from "react";
+import { FloatingLabel, Modal } from "react-bootstrap";
+import { Button, Card, Form, Row } from "react-bootstrap";
+import { useState } from "react";
 
-export default function CreateSpaceModal(props) {
-  const [data, setData] = useState({ spaceName: "", spaceDescription: "" });
-
+function CreateSpaceModal(props) {
+  const [data, setData] = useState([ ]);
   const handleOnChange = (e) => {
     const { name, value } = e.target;
     setData((prevData) => ({
       ...prevData,
       [name]: value,
     }));
-  };
-  const sendData = (data) => {
-    props.dataProp(data);
-    console.log("props.dataProp", props.dataProp);
-  };
+    props.fromCreateSpaceModal(data);
+    };
+//     const handleOnSubmit = () => {
+//         setData([..data, ])
+//  }
 
   return (
     <Modal
       {...props}
+      onHide
       size="lg"
       aria-labelledby="vertically-centrallised-modal"
       centered
@@ -98,16 +100,16 @@ export default function CreateSpaceModal(props) {
         <Button variant="outline-danger" onClick={props.onHide}>
           Cancel
         </Button>
-        <Button
-          variant="outline-success"
-          onClick={() => {
-            sendData(data);
-            props.onHide();
-          }}
-        >
+              <Button variant="outline-success" onClick={() => {
+                  console.log(data);
+                  setData([...data, data])
+                  props.onHide();
+              }} type="submit">
           Create
         </Button>
       </Modal.Footer>
     </Modal>
   );
 }
+
+export default CreateSpaceModal;

@@ -1,25 +1,40 @@
-import React, { useState } from "react";
+import React, { useCallback, useEffect } from "react";
+
 import { BsPlusCircle } from "react-icons/bs";
 import { Button } from "react-bootstrap";
+import { useState } from "react";
 import CreateSpaceModal from "../CreateSpaceModal";
 
-function CreateButton({ createData }) {
+function CreateButton() {
   const [showModal, setShowModal] = useState(false);
-  const [data, setData] = useState([]);
+  const [fromModal, setFromModal] = useState({});
 
-  const handleDataProp = (newData) => {
-    console.log(" newData", newData);
-    setData([...data, newData]);
-  };
-  createData(data);
-  // const callBack = useCallback((data) => {
-  //     createData(data);
-  // }, [createData]);
-  
-  // useEffect(() => {
-  //   callBack();
-  // }, [callBack]);
-  
+    const fromCreateSpaceModal = useCallback((data) => {
+      
+        /*
+        workspace parent component
+        a) list
+        b) function that adds to the list
+
+
+        create component
+        takes in
+        a) function to add to the list
+
+        list of work spaces workSpaceList = [ ] ;
+        //newWorkspace = {
+        name:" work space name",
+        description:" despription"
+        }
+
+        setWorkSpace([...workSpaceList,newWorkSpace])
+        */
+      setFromModal(data);
+  }, [])
+    useEffect(() => {
+      fromCreateSpaceModal();
+    }, [fromCreateSpaceModal]);
+    console.log(fromModal)
   return (
     <>
       <Button onClick={() => setShowModal(true)}>
@@ -31,7 +46,7 @@ function CreateButton({ createData }) {
         </h5>
       </Button>
       <CreateSpaceModal
-        dataProp={handleDataProp} //the function to set data
+        fromCreateSpaceModal={fromCreateSpaceModal}
         show={showModal}
         onHide={() => setShowModal(false)}
       />
