@@ -58,7 +58,7 @@ function WorkSpaceBody({ fromWorkSpace }) {
                     </p>
                   </Card.Body>
                   <Card.Footer>
-                    <Link to="/create-team">
+                    <Link to="/create-team-handler">
                       <Button variant="outline-secondary">
                         <h6>Manage Space</h6>
                       </Button>
