@@ -3,7 +3,7 @@ import { BsPlusCircle } from "react-icons/bs";
 import { Button } from "react-bootstrap";
 import CreateSpaceModal from "../CreateSpaceModal";
 
-function CreateButton({ createData }) {
+function CreateButton({createData }) {
   const [showModal, setShowModal] = useState(false);
   const [data, setData] = useState([]);
 
@@ -11,15 +11,18 @@ function CreateButton({ createData }) {
     console.log(" newData", newData);
     setData([...data, newData]);
   };
+  // const handleBtnStatus = () => {
+  //   buttonStatus(false);
+  // };
   createData(data);
   // const callBack = useCallback((data) => {
   //     createData(data);
   // }, [createData]);
-  
+
   // useEffect(() => {
   //   callBack();
   // }, [callBack]);
-  
+
   return (
     <>
       <Button onClick={() => setShowModal(true)}>
@@ -31,6 +34,7 @@ function CreateButton({ createData }) {
         </h5>
       </Button>
       <CreateSpaceModal
+        // btnStatus={handleBtnStatus}
         dataProp={handleDataProp} //the function to set data
         show={showModal}
         onHide={() => setShowModal(false)}

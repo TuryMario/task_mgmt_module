@@ -3,6 +3,7 @@ import { FloatingLabel, Modal, Button, Card, Form, Row } from "react-bootstrap";
 
 export default function CreateSpaceModal(props) {
   const [data, setData] = useState({ spaceName: "", spaceDescription: "" });
+  // const [,setBtnStatus] = useState(true)
 
   const handleOnChange = (e) => {
     const { name, value } = e.target;
@@ -13,6 +14,7 @@ export default function CreateSpaceModal(props) {
   };
   const sendData = (data) => {
     props.dataProp(data);
+    // props.btnStatus(false);
     console.log("props.dataProp", props.dataProp);
   };
 

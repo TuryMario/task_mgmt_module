@@ -22,53 +22,59 @@ function WorkSpaceBody({ fromWorkSpace }) {
     setCards(uniqueWorkspaceData);
   }, [uniqueWorkspaceData]);
 
+  const handleName = (data) => {
+    // console.log("the data is....", data);
+    toggle(data);
+    setSpaceInstanceBody(false);
+  };
+
   return (
-      <>
-        <Row xs={3} md={3} className="g-4">
-          {cards.map((card, index) => (
-              <Col key={index}>
-                <Card border="info" className="text-center">
-                  <Card.Body>
-                    <div
-                        style={{
-                          height: "100px",
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "center",
-                        }}
-                    >
-                      <div
-                          style={{
-                            width: "40px",
-                            height: "40px",
-                            borderRadius: "50%",
-                            backgroundColor: "grey",
-                            display: "flex",
-                            alignItems: "center",
-                            justifyContent: "center",
-                          }}
-                      >
-                        <span style={{ fontSize: "24px", color: "white" }}>C</span>
-                      </div>
-                    </div>
-                    <h2>{card.spaceName}</h2>
-                    <h5>Space Category</h5>
-                    <p>
-                      <em>{card.spaceDescription}</em>
-                    </p>
-                  </Card.Body>
-                  <Card.Footer>
-                    <Link to="/create-team-handler">
-                      <Button variant="outline-secondary">
-                        <h6>Manage Space</h6>
-                      </Button>
-                    </Link>
-                  </Card.Footer>
-                </Card>
-              </Col>
-          ))}
-        </Row>
-      </>
+    <>
+      <Row xs={3} md={3} className="g-4">
+        {cards.map((card, index) => (
+          <Col key={index}>
+            <Card border="info" className="text-center">
+              <Card.Body>
+                <div
+                  style={{
+                    height: "100px",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <div
+                    style={{
+                      width: "40px",
+                      height: "40px",
+                      borderRadius: "50%",
+                      backgroundColor: "grey",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <span style={{ fontSize: "24px", color: "white" }}>C</span>
+                  </div>
+                </div>
+                <h2>{card.spaceName}</h2>
+                <h5>Space Category</h5>
+                <p>
+                  <em>{card.spaceDescription}</em>
+                </p>
+              </Card.Body>
+              <Card.Footer>
+                <Link to="/create-team-handler">
+                  <Button variant="outline-secondary">
+                    <h6>Manage Space</h6>
+                  </Button>
+                </Link>
+              </Card.Footer>
+            </Card>
+          </Col>
+        ))}
+      </Row>
+    </>
   );
 }
 

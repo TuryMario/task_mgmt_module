@@ -10,8 +10,8 @@ function RouteComponent() {
       <Routes>
         <Route path="/" element={<WorkSpace />} />
         <Route path="/workspacedetails" element={<WorkSpaceDetails />} />
-        <Route path="/maintaskdetailspage" element={ <MainTaskDetailsPage /> } />
-          <Route path="/create-team-handler" element={<CreateTeamHandler />} />
+        <Route path="/maintaskdetailspage" element={<MainTaskDetailsPage />} />
+        <Route path="/create-team-handler" element={<CreateTeamHandler />} />
       </Routes>
     </div>
   );
