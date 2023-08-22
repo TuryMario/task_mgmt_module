@@ -3,7 +3,8 @@ import { FloatingLabel, Modal, Button, Card, Form, Row } from "react-bootstrap";
 
 export default function CreateSpaceModal(props) {
   const [data, setData] = useState({ spaceName: "", spaceDescription: "" });
-  // const [,setBtnStatus] = useState(true)
+  const [nameError, setNameError] = useState("");
+  const [descriptionError, setDescriptionError] = useState("");
 
   const handleOnChange = (e) => {
     const { name, value } = e.target;
@@ -11,11 +12,36 @@ export default function CreateSpaceModal(props) {
       ...prevData,
       [name]: value,
     }));
+
+    // Reset validation errors
+    if (name === "spaceName") {
+      setNameError("");
+    } else if (name === "spaceDescription") {
+      setDescriptionError("");
+    }
   };
-  const sendData = (data) => {
-    props.dataProp(data);
-    // props.btnStatus(false);
-    console.log("props.dataProp", props.dataProp);
+
+  const validateInputs = () => {
+    let valid = true;
+
+    if (data.spaceName.trim() === "") {
+      setNameError("Space Name is required.");
+      valid = false;
+    }
+
+    if (data.spaceDescription.trim() === "") {
+      setDescriptionError("Space Description is required.");
+      valid = false;
+    }
+
+    return valid;
+  };
+
+  const sendData = () => {
+    if (validateInputs()) {
+      props.dataProp(data);
+      props.onHide();
+    }
   };
 
   return (
@@ -63,7 +89,9 @@ export default function CreateSpaceModal(props) {
                     placeholder="space_name"
                     value={data.spaceName}
                     onChange={handleOnChange}
+                    required
                   />
+                  <div className="text-danger">{nameError}</div>
                 </FloatingLabel>
               </Row>
 
@@ -89,7 +117,9 @@ export default function CreateSpaceModal(props) {
                     placeholder="space_description"
                     value={data.spaceDescription}
                     onChange={handleOnChange}
+                    required
                   />
+                  <div className="text-danger">{descriptionError}</div>
                 </FloatingLabel>
               </Row>
             </Form>
@@ -100,13 +130,7 @@ export default function CreateSpaceModal(props) {
         <Button variant="outline-danger" onClick={props.onHide}>
           Cancel
         </Button>
-        <Button
-          variant="outline-success"
-          onClick={() => {
-            sendData(data);
-            props.onHide();
-          }}
-        >
+        <Button variant="outline-success" onClick={sendData}>
           Create
         </Button>
       </Modal.Footer>
