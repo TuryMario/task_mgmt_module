@@ -1,15 +1,15 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import WorkSpace from "../pages/workSpace/WorkSpace";
-import WorkSpaceDetails from "../pages/workSpaceDetails/WorkSpaceDetails....copy..table";
-import MainTaskDetailsPage from "../pages/tasks/taskDetails/MainTaskDetailsPage"
+// import MainTaskDetailsPage from "../pages/tasks/taskDetails/MainTaskDetailsPage";
+import WorkSpaceInstance from "../pages/workSpaceDetails/WorkSpaceInstance";
 function RouteComponent() {
   return (
     <div>
       <Routes>
         <Route path="/" element={<WorkSpace />} />
-        <Route path="/workspacedetails" element={<WorkSpaceDetails />} />
-        <Route path="/maintaskdetailspage" element={ <MainTaskDetailsPage /> } />
+        {/* <Route path="/maintaskdetailspage/" element={<MainTaskDetailsPage />} /> */}
+        <Route path="workSpaceInstance/" element={<WorkSpaceInstance />} />
       </Routes>
     </div>
   );

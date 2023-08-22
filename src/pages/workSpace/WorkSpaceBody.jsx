@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Card, Col, Row, Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
-function WorkSpaceBody({ fromWorkSpace }) {
+function WorkSpaceBody({ toggle, fromWorkSpace }) {
   const [cards, setCards] = useState([]);
+  const [spaceInstanceBody, setSpaceInstanceBody] = useState(true);
   // fn to remove duplicates
   const removeDuplicates = (arr) => {
     const seen = new Set();
@@ -20,50 +22,72 @@ function WorkSpaceBody({ fromWorkSpace }) {
     setCards(uniqueWorkspaceData);
   }, [uniqueWorkspaceData]);
 
+  const handleName = (data) => {
+    // console.log("the data is....", data);
+    toggle(data);
+    setSpaceInstanceBody(false);
+  };
+
   return (
     <>
-      <Row xs={3} md={3} className="g-4">
-        {cards.map((card, index) => (
-          <Col>
-            <Card border="info" className="text-center">
-              <Card.Body>
-                <div
-                  style={{
-                    height: "100px",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                >
+      {spaceInstanceBody ? (
+        <Row xs={3} md={3} className="g-4">
+          {cards.map((card, index) => (
+            <Col>
+              <Card border="info" className="text-center">
+                <Card.Body>
                   <div
                     style={{
-                      width: "40px",
-                      height: "40px",
-                      borderRadius: "50%",
-                      backgroundColor: "grey",
+                      height: "100px",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
                     }}
                   >
-                    <span style={{ fontSize: "24px", color: "white" }}>C</span>
+                    <div
+                      style={{
+                        width: "40px",
+                        height: "40px",
+                        borderRadius: "50%",
+                        backgroundColor: "grey",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}
+                    >
+                      <span style={{ fontSize: "24px", color: "white" }}>
+                        C
+                      </span>
+                    </div>
                   </div>
-                </div>
-                <h2>{card.spaceName}</h2>
-                <h5>Space Category</h5>
-                <p>
-                  <em> {card.spaceDescription}</em>
-                </p>
-              </Card.Body>
-              <Card.Footer>
-                <Button variant="outline-secondary">
-                  <h6>Manage Space</h6>
-                </Button>
-              </Card.Footer>
-            </Card>
-          </Col>
-        ))}
-      </Row>
+                  <h2>{card.spaceName}</h2>
+                  <h5>Space Category</h5>
+                  <p>
+                    <em> {card.spaceDescription}</em>
+                  </p>
+                </Card.Body>
+                <Card.Footer>
+                  <Link to={""}>
+                    <Button
+                      onClick={() => {
+                        const name = (
+                          <div>
+                            Space /<span style={{color:"blue"}}>{card.spaceName}</span>
+                          </div>
+                        );
+                        handleName(name);
+                      }}
+                      variant="outline-secondary"
+                    >
+                      <h6>Manage Space</h6>
+                    </Button>
+                  </Link>
+                </Card.Footer>
+              </Card>
+            </Col>
+          ))}
+        </Row>
+      ) : null}
     </>
   );
 }
