@@ -20,6 +20,7 @@ export default function WorkSpace() {
   const newWorkSpace = data;
   return (
     <>
+      {/* btn - to control visibility of the create button */}
       <WorkSpaceNavBar btn={btn} spaceHead={navToggle} btnData={handleData} />
       <WorkSpaceBody
         btn={btn}

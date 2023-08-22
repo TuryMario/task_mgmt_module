@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Card, Col, Row, Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
-function WorkSpaceBody({ fromWorkSpace }) {
+// import { Link } from "react-router-dom";
+import CreateTeamHandler from "../teams/CreateTeamHandler";
+function WorkSpaceBody({ fromWorkSpace, toggle }) {
   const [cards, setCards] = useState([]);
+  const [spaceInstanceBody, setSpaceInstanceBody] = useState(true);
 
   // fn to remove duplicates
   const removeDuplicates = (arr) => {
@@ -23,14 +25,13 @@ function WorkSpaceBody({ fromWorkSpace }) {
   }, [uniqueWorkspaceData]);
 
   const handleName = (data) => {
-    // console.log("the data is....", data);
     toggle(data);
     setSpaceInstanceBody(false);
   };
 
   return (
     <>
-      <Row xs={3} md={3} className="g-4">
+      {spaceInstanceBody ? (<Row xs={3} md={3} className="g-4">
         {cards.map((card, index) => (
           <Col key={index}>
             <Card border="info" className="text-center">
@@ -64,16 +65,23 @@ function WorkSpaceBody({ fromWorkSpace }) {
                 </p>
               </Card.Body>
               <Card.Footer>
-                <Link to="/create-team-handler">
-                  <Button variant="outline-secondary">
+                  <Button
+                  onClick={() => {
+                      const name = (
+                        <div>
+                          Space / <span style={{color:"blue"}}> {card.spaceName}</span>
+                        </div>
+                      );
+                      handleName(name);
+                    }}
+                    variant="outline-secondary">
                     <h6>Manage Space</h6>
                   </Button>
-                </Link>
               </Card.Footer>
             </Card>
           </Col>
         ))}
-      </Row>
+      </Row>): <CreateTeamHandler /> }
     </>
   );
 }

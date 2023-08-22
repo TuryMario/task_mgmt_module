@@ -11,17 +11,8 @@ function CreateButton({createData }) {
     console.log(" newData", newData);
     setData([...data, newData]);
   };
-  // const handleBtnStatus = () => {
-  //   buttonStatus(false);
-  // };
   createData(data);
-  // const callBack = useCallback((data) => {
-  //     createData(data);
-  // }, [createData]);
-
-  // useEffect(() => {
-  //   callBack();
-  // }, [callBack]);
+ 
 
   return (
     <>
