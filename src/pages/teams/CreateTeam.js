@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
-import SearchBar from './SearchBar';
 
 const CreateTeam = ({ onCreateTeam }) => {
     const [showModal, setShowModal] = useState(false);
@@ -32,7 +31,7 @@ const CreateTeam = ({ onCreateTeam }) => {
 
     return (
         <div>
-            <h2>Create Team</h2>
+            <h2>Create New Team</h2>
             <Button variant="primary" onClick={() => setShowModal(true)}>
                 Create Team
             </Button>
@@ -61,15 +60,14 @@ const CreateTeam = ({ onCreateTeam }) => {
                                 onChange={(e) => setDescription(e.target.value)}
                             />
                         </Form.Group>
-                        <Form.Group controlId="selectedMember">
-                            <Form.Label>Selected Member</Form.Label>
-                            {selectedMember && (
-                                <div>
-                                    {selectedMember.name} ({selectedMember.email})
-                                </div>
-                            )}
-                        </Form.Group>
-                        <SearchBar onSearch={handleMemberSelect} />
+                        {/*<Form.Group controlId="selectedMember">*/}
+                        {/*    <Form.Label>Selected Member</Form.Label>*/}
+                        {/*    {selectedMember && (*/}
+                        {/*        <div>*/}
+                        {/*            {selectedMember.name} ({selectedMember.email})*/}
+                        {/*        </div>*/}
+                        {/*    )}*/}
+                        {/*</Form.Group>*/}
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>

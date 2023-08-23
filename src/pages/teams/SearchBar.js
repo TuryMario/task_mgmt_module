@@ -1,45 +1,36 @@
 import React, { useState } from 'react';
-import { Form, FormControl, Button } from 'react-bootstrap';
+import { Form, Button, Card } from 'react-bootstrap';
 
-const SearchBar = ({ onSearch }) => {
+const SearchBar = ({ onSearch, onClose }) => {
     const [searchQuery, setSearchQuery] = useState('');
 
-    const handleSearch = async () => {
-        // Simulate fetching search results
-        const results = await fetchSearchResults(searchQuery);
-        onSearch(results);
+    const handleInputChange = event => {
+        const query = event.target.value;
+        setSearchQuery(query);
+        onSearch(query); // Pass the query to the parent component's onSearch function
     };
 
-    // Simulated function to fetch search results
-    const fetchSearchResults = (query) => {
-        // Simulate an API call
-        return new Promise((resolve) => {
-            setTimeout(() => {
-                const dummyResults = [
-                    { name: 'John Doe', email: 'john@example.com' },
-                    { name: 'Jane Smith', email: 'jane@example.com' },
-                    { name: 'Alex Johnson', email: 'alex@example.com' },
-                ];
-                resolve(dummyResults);
-            }, 1000);
-        });
+    const handleSearchClose = () => {
+        setSearchQuery('');
+        onClose();
     };
 
     return (
-        <div className="mb-4">
-            <Form inline>
-                <FormControl
-                    type="text"
-                    placeholder="Search for members"
-                    className="mr-sm-2"
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                />
-                <Button variant="outline-primary" onClick={handleSearch}>
-                    Search
-                </Button>
-            </Form>
-        </div>
+        <Card className="search-bar-card">
+            <Card.Body>
+                <Form inline className="search-bar-form">
+                    <Form.Control
+                        type="text"
+                        placeholder="Search new member..."
+                        value={searchQuery}
+                        onChange={handleInputChange}
+                    />
+                    <Button variant="outline-secondary" onClick={handleSearchClose}>
+                        Cancel
+                    </Button>
+                </Form>
+            </Card.Body>
+        </Card>
     );
 };
 
