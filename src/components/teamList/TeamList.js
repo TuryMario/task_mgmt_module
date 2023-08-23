@@ -95,5 +95,4 @@ const TeamList = ({ teams, setTeams }) => {
         </div>
     );
 };
-
 export default TeamList;
