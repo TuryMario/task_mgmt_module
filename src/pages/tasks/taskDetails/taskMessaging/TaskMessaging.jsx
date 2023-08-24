@@ -1,8 +1,170 @@
 import React from 'react'
+import {
+  MDBContainer,
+  MDBRow,
+  MDBCol,
+  MDBCard,
+  MDBCardHeader,
+  MDBCardBody,
+  MDBCardFooter,
+  MDBIcon,
+  MDBBtn,
+  MDBScrollbar,
+} from "mdb-react-ui-kit";
 
-function TaskMessaging() {
+export function TaskMessaging() {
   return (
-    <div>TaskMessaging</div>
+    <MDBContainer fluid className="py-5" style={{ backgroundColor: "#eee" }}>
+      <MDBRow className="d-flex justify-content-center">
+        <MDBCol md="10" lg="8" xl="6">
+          <MDBCard id="chat2" style={{ borderRadius: "15px" }}>
+            <MDBCardHeader className="d-flex justify-content-between align-items-center p-3">
+              <h5 className="mb-0">Comments</h5>
+              <MDBBtn color="primary" size="sm" rippleColor="dark">
+                Type your comment
+              </MDBBtn>
+            </MDBCardHeader>
+            <MDBScrollbar
+              suppressScrollX
+              style={{ position: "relative", height: "400px" }}
+            >
+              <MDBCardBody>
+                <div className="d-flex flex-row justify-content-start">
+                  <img
+                    src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3-bg.webp"
+                    alt="avatar 1"
+                    style={{ width: "45px", height: "100%" }}
+                  />
+                  <div>
+                    <p
+                      className="small p-2 ms-3 mb-1 rounded-3"
+                      style={{ backgroundColor: "#f5f6f7" }}
+                    >
+                      Hi
+                    </p>
+                    <p
+                      className="small p-2 ms-3 mb-1 rounded-3"
+                      style={{ backgroundColor: "#f5f6f7" }}
+                    >
+                      This is my first task
+                    </p>
+                    <p
+                      className="small p-2 ms-3 mb-1 rounded-3"
+                      style={{ backgroundColor: "#f5f6f7" }}
+                    >
+                      Everyone feel at work
+                    </p>
+                    <p className="small ms-3 mb-3 rounded-3 text-muted">
+                      07:58
+                    </p>
+                  </div>
+                </div>
+
+                <div className="divider d-flex align-items-center mb-4">
+                  <p
+                    className="text-center mx-3 mb-0"
+                    style={{ color: "#a2aab7" }}
+                  >
+                    Today
+                  </p>
+                </div>
+
+                <div className="d-flex flex-row justify-content-end mb-4 pt-1">
+                  <div>
+                    <p className="small p-2 me-3 mb-1 text-white rounded-3 bg-primary">
+                      Hello, Thank you
+                    </p>
+                    <p className="small p-2 me-3 mb-1 text-white rounded-3 bg-primary">
+                      My second task
+                    </p>
+                    <p className="small p-2 me-3 mb-1 text-white rounded-3 bg-primary">
+                      Commitment is key.
+                    </p>
+                    <p className="small me-3 mb-3 rounded-3 text-muted d-flex justify-content-end">
+                      08:06
+                    </p>
+                  </div>
+                  <img
+                    src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava4-bg.webp"
+                    alt="avatar 1"
+                    style={{ width: "45px", height: "100%" }}
+                  />
+                </div>
+
+                <div className="d-flex flex-row justify-content-start mb-4">
+                  <img
+                    src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3-bg.webp"
+                    alt="avatar 1"
+                    style={{ width: "45px", height: "100%" }}
+                  />
+                  <div>
+                    <p
+                      className="small p-2 ms-3 mb-1 rounded-3"
+                      style={{ backgroundColor: "#f5f6f7" }}
+                    >
+                      Okay
+                    </p>
+                    <p
+                      className="small p-2 ms-3 mb-1 rounded-3"
+                      style={{ backgroundColor: "#f5f6f7" }}
+                    >
+                      Will do my best then 
+                    </p>
+                    <p className="small ms-3 mb-3 rounded-3 text-muted">
+                      08:07
+                    </p>
+                  </div>
+                </div>
+
+                <div className="d-flex flex-row justify-content-end mb-4">
+                  <div>
+                    <p className="small p-2 me-3 mb-1 text-white rounded-3 bg-primary">
+                      That's awesome!
+                    </p>
+                    <p className="small p-2 me-3 mb-1 text-white rounded-3 bg-primary">
+                      Am here if you need help 
+                    </p>
+                    <p className="small p-2 me-3 mb-1 text-white rounded-3 bg-primary">
+                      Just reach out 
+                    </p>
+                    <p className="small me-3 mb-3 rounded-3 text-muted d-flex justify-content-end">
+                      08:09
+                    </p>
+                  </div>
+                  <img
+                    src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava4-bg.webp"
+                    alt="avatar 1"
+                    style={{ width: "45px", height: "100%" }}
+                  />
+                </div>
+              </MDBCardBody>
+            </MDBScrollbar>
+            <MDBCardFooter className="text-muted d-flex justify-content-start align-items-center p-3">
+              <img
+                src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3-bg.webp"
+                alt="avatar 3"
+                style={{ width: "45px", height: "100%" }}
+              />
+              <input
+                type="text"
+                class="form-control form-control-lg"
+                id="exampleFormControlInput1"
+                placeholder="Type message"
+              ></input>
+              <a className="ms-1 text-muted" href="#!">
+                <MDBIcon fas icon="paperclip" />
+              </a>
+              <a className="ms-3 text-muted" href="#!">
+                <MDBIcon fas icon="smile" />
+              </a>
+              <a className="ms-3" href="#!">
+                <MDBIcon fas icon="paper-plane" />
+              </a>
+            </MDBCardFooter>
+          </MDBCard>
+        </MDBCol>
+      </MDBRow>
+    </MDBContainer>
   )
 }
 
