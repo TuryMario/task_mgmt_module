@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {Card, ListGroup, Button, Modal} from 'react-bootstrap';
 import SearchBar from '../../pages/teams/SearchBar';
 import Tasks from '../../pages/tasks/Tasks';
@@ -91,6 +91,7 @@ const TeamList = ({ teams, setTeams }) => {
                     <Tasks />
                 </Modal.Body>
             </Modal>
+            {/*<Link to="/view-tasks"><Button>View Tasks</Button></Link>*/}
             <Link to="/"><Button>Back to Workspace</Button></Link>
         </div>
     );
