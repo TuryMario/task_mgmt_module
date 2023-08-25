@@ -1,48 +1,43 @@
 import React, { useState } from 'react';
-import {Card, ListGroup, Button, Modal} from 'react-bootstrap';
-import SearchBar from '../../pages/teams/SearchBar';
+import { Card, ListGroup, Button, Modal } from 'react-bootstrap';
 import Tasks from '../../pages/tasks/Tasks';
+import SearchBar from '../../pages/teams/SearchBar';
 import { Link } from 'react-router-dom';
 
 const TeamList = ({ teams, setTeams }) => {
-    const [searchBarVisibility, setSearchBarVisibility] = useState(teams.map(() => false));
-    // const [filteredTeams, setFilteredTeams] = useState(teams);
     const [taskModalShow, setTaskModalShow] = useState(false);
+    const [showSearchBarModal, setShowSearchBarModal] = useState(false);
+    const [selectedTeamIndex, setSelectedTeamIndex] = useState(null);
 
     const handleAddMemberClick = (teamIndex) => {
-        console.log("Add New Member button clicked for team index:", teamIndex);
-        const updatedSearchBarVisibility = searchBarVisibility.map((value, index) => index === teamIndex);
-        setSearchBarVisibility(updatedSearchBarVisibility);
-        console.log("searchBarVisibility:", searchBarVisibility);
+        setSelectedTeamIndex(teamIndex);
+        setShowSearchBarModal(true);
     };
 
-    const handleSearchClose = (teamIndex) => {
-        const updatedSearchBarVisibility = searchBarVisibility.map((value, index) => {
-            if (index === teamIndex) {
-                return false; // Hide the search bar for the specific team
-            }
-            return value;
-        });
-        setSearchBarVisibility(updatedSearchBarVisibility);
+    const handleSearchClose = () => {
+        setShowSearchBarModal(false);
+        setSelectedTeamIndex(null);
     };
 
-    const handleSearch = (query, teamIndex) => {
-        const updatedTeams = teams.map((team, index) => {
-            if (index === teamIndex) {
-                const selectedMember = team.members.find(member => member.name.toLowerCase().includes(query.toLowerCase()));
-                if (selectedMember) {
-                    const updatedTeam = {
-                        ...team,
-                        members: [...team.members, selectedMember],
-                    };
-                    setTeams(teams => teams.map((t, i) => i === index ? updatedTeam : t)); // Update the teams state
-                    handleSearchClose(teamIndex); // Close the search bar after adding a member
+    const handleSearch = (query) => {
+        if (selectedTeamIndex !== null) {
+            const updatedTeams = teams.map((team, index) => {
+                if (index === selectedTeamIndex) {
+                    const selectedMember = team.members.find(member => member.name.toLowerCase().includes(query.toLowerCase()));
+                    if (selectedMember) {
+                        const updatedTeam = {
+                            ...team,
+                            members: [...team.members, selectedMember],
+                        };
+                        setTeams(updatedTeams);
+                        handleSearchClose();
+                        return updatedTeam;
+                    }
                 }
-            }
-            return team;
-        });
+                return team;
+            });
+        }
     };
-
 
     return (
         <div>
@@ -73,12 +68,6 @@ const TeamList = ({ teams, setTeams }) => {
                             >
                                 Add Tasks
                             </Button>
-                            {searchBarVisibility[index] && (
-                                <SearchBar
-                                    onSearch={(query) => handleSearch(query, index)}
-                                    onClose={() => handleSearchClose(index)}
-                                />
-                            )}
                         </Card.Body>
                     </Card>
                 ))}
@@ -89,6 +78,17 @@ const TeamList = ({ teams, setTeams }) => {
                 </Modal.Header>
                 <Modal.Body>
                     <Tasks />
+                </Modal.Body>
+            </Modal>
+            <Modal show={showSearchBarModal} onHide={handleSearchClose}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Search and Add Member</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <SearchBar
+                        onSearch={(query) => handleSearch(query)}
+                        onClose={handleSearchClose}
+                    />
                 </Modal.Body>
             </Modal>
             {/*<Link to="/view-tasks"><Button>View Tasks</Button></Link>*/}
