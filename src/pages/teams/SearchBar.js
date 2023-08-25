@@ -1,18 +1,24 @@
 import React, { useState } from 'react';
 import { Form, Button, Card } from 'react-bootstrap';
 
-const SearchBar = ({ onSearch, onClose }) => {
+const SearchBar = ({ onSearch, onClose, onSelectMember, searchResults }) => {
     const [searchQuery, setSearchQuery] = useState('');
 
     const handleInputChange = event => {
         const query = event.target.value;
         setSearchQuery(query);
-        onSearch(query); // Pass the query to the parent component's onSearch function
+        onSearch(query);
     };
 
     const handleSearchClose = () => {
         setSearchQuery('');
         onClose();
+    };
+
+    const handleMemberSelect = member => {
+        onSelectMember(member);
+        setSearchQuery('');
+        onClose(); // Close the search bar after selecting a member
     };
 
     return (
@@ -29,6 +35,15 @@ const SearchBar = ({ onSearch, onClose }) => {
                         Cancel
                     </Button>
                 </Form>
+                {/* Display search results here */}
+                {/* Example: */}
+                 <ul>
+                    {searchResults.map(member => (
+                        <li key={member.id} onClick={() => handleMemberSelect(member)}>
+                            {member.name}
+                        </li>
+                    ))}
+                </ul>
             </Card.Body>
         </Card>
     );
