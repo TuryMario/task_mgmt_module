@@ -92,7 +92,7 @@ const TeamList = ({ teams, setTeams }) => {
                 </Modal.Body>
             </Modal>
             {/*<Link to="/view-tasks"><Button>View Tasks</Button></Link>*/}
-            <Link to="/"><Button>Back to Workspace</Button></Link>
+            <Link to="/task-messaging"><Button>Back to Workspace</Button></Link>
         </div>
     );
 };

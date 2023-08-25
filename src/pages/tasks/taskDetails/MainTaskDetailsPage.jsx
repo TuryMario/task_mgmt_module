@@ -21,7 +21,7 @@ function MainTaskDetailsPage() {
               <Card>
                 <Card.Img variant="top" src="holder.js/100px160" />
                 <Card.Body>
-                  <Card.Title>Card title</Card.Title>
+                  {/*<Card.Title>Card title</Card.Title>*/}
                   <Card.Text>
                     <TaskStatusDetails />
                   </Card.Text>
@@ -30,9 +30,9 @@ function MainTaskDetailsPage() {
             </Col>
 
             <Col>
-              <Card>
+              <Card style={{ height:"904 px", position:"fixed"}}>
                 <Card.Body>
-                  <Card.Title>Card title</Card.Title>
+                  <Card.Title>Comments</Card.Title>
                   <Card.Text>
                     <TaskMessaging />
                   </Card.Text>
