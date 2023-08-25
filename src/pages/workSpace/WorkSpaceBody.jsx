@@ -69,7 +69,7 @@ function WorkSpaceBody({ fromWorkSpace, toggle }) {
                   onClick={() => {
                       const name = (
                         <div>
-                          Space / <span style={{color:"blue"}}> {card.spaceName}</span>
+                          Space :<span style={{color:"blue"}}> {card.spaceName}</span>
                         </div>
                       );
                       handleName(name);
