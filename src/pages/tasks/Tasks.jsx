@@ -110,10 +110,6 @@ export default function Tasks() {
                     </Form>
                 </Card.Body>
             </Card>
-
-            <div>
-                <TaskListTable taskListData={task} />
-            </div>
         </>
     );
 }

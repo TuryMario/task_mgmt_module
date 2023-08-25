@@ -3,9 +3,10 @@ import { Card, ListGroup, Button, Modal } from 'react-bootstrap';
 import Tasks from '../../pages/tasks/Tasks';
 import SearchBar from '../../pages/teams/SearchBar';
 import { Link } from 'react-router-dom';
+import CreateTask from "../createTask/CreateTask";
 
 const TeamList = ({ teams, setTeams }) => {
-    const [taskModalShow, setTaskModalShow] = useState(false);
+    // const [taskModalShow, setTaskModalShow] = useState(false);
     const [showSearchBarModal, setShowSearchBarModal] = useState(false);
     const [selectedTeamIndex, setSelectedTeamIndex] = useState(null);
 
@@ -53,33 +54,28 @@ const TeamList = ({ teams, setTeams }) => {
                                     <ListGroup.Item key={memberIndex}>{member.name}</ListGroup.Item>
                                 ))}
                             </ListGroup>
-                            <Button
-                                variant="secondary"
-                                className="mt-3"
-                                onClick={() => handleAddMemberClick(index)}
-                            >
-                                Add new member
-                            </Button>
-                            {" "}
-                            <Button
-                                variant="primary"
-                                className="mt-3"
-                                onClick={() => setTaskModalShow(true)}
-                            >
-                                Add Tasks
-                            </Button>
+                            <div className="text-left">
+                                <Button
+                                    variant="outline-danger"
+                                    className="mt-3"
+                                    onClick={() => handleAddMemberClick(index)}
+                                >
+                                    Delete
+                                </Button>
+                                <Button
+                                    variant="primary"
+                                    style={{marginLeft: '5px' }}
+                                    className="mt-3"
+
+                                >
+                                    Details
+                                </Button>
+                            </div>
                         </Card.Body>
                     </Card>
                 ))}
             </div>
-            <Modal show={taskModalShow} onHide={() => setTaskModalShow(false)}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Create New Task</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    <Tasks />
-                </Modal.Body>
-            </Modal>
+           {/*<CreateTask/>*/}
             <Modal show={showSearchBarModal} onHide={handleSearchClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>Search and Add Member</Modal.Title>
