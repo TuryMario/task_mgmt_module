@@ -31,18 +31,18 @@ const TeamList = ({ teams, setTeams }) => {
             if (index === teamIndex) {
                 const selectedMember = team.members.find(member => member.name.toLowerCase().includes(query.toLowerCase()));
                 if (selectedMember) {
-                    return {
+                    const updatedTeam = {
                         ...team,
                         members: [...team.members, selectedMember],
                     };
+                    setTeams(teams => teams.map((t, i) => i === index ? updatedTeam : t)); // Update the teams state
+                    handleSearchClose(teamIndex); // Close the search bar after adding a member
                 }
             }
             return team;
         });
-
-        setTeams(updatedTeams);
-        handleSearchClose(teamIndex); // Close the search bar after adding a member
     };
+
 
     return (
         <div>
