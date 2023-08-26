@@ -4,6 +4,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import {Button, Modal} from 'react-bootstrap';
 import SearchBar from '../../../pages/teams/SearchBar';
+import {Table} from "@mui/material";
 
 const membersList = [
     { id: 1, name: 'John Doe' },
@@ -26,7 +27,6 @@ const membersList = [
     { id: 18, name: 'Emma Harris' },
     { id: 19, name: 'Ethan Thomas' },
     { id: 20, name: 'Oliver Martinez' },
-    // ... add more names
 ];
 
 export default function TeamMember({ teams, setTeams }) {
@@ -34,6 +34,7 @@ export default function TeamMember({ teams, setTeams }) {
     const [selectedTeamIndex, setSelectedTeamIndex] = useState(null);
     const [selectedMember, setSelectedMember] = useState(null);
     const [searchResults, setSearchResults] = useState([]); // Initialize searchResults state
+    const [addedMembers, setAddedMembers] = useState([]);
 
     const handleAddMemberClick = (teamIndex) => {
         setSelectedTeamIndex(teamIndex);
@@ -72,9 +73,11 @@ export default function TeamMember({ teams, setTeams }) {
                 return team;
             });
             setTeams(updatedTeams);
+            setAddedMembers([...addedMembers, selectedMember]); // Add selected member to addedMembers
             handleSearchClose();
         }
     };
+
 
     return (
         <>
@@ -88,7 +91,7 @@ export default function TeamMember({ teams, setTeams }) {
                     </Col>
                 </Row>
             </Container>
-            <Modal show={showSearchBarModal}>
+            <Modal show={showSearchBarModal} onHide={handleSearchClose}>
                 <Modal.Header>
                     <Modal.Title>Search and Add Member</Modal.Title>
                 </Modal.Header>
@@ -100,14 +103,36 @@ export default function TeamMember({ teams, setTeams }) {
                         membersList={membersList}
                         searchResults={searchResults}
                     />
-                    {selectedMember && (
+                    {selectedMember ? (
                         <div>
                             Selected Member: {selectedMember.name}
                             <Button onClick={handleAddSelectedMember}>Add Selected Member</Button>
                         </div>
-                    )}
+                    ) : null}
                 </Modal.Body>
             </Modal>
+            <br/>
+            {addedMembers.length >= 0 && (
+                <div>
+                    <h3>Added Members</h3>
+                    <Table>
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {addedMembers.map((member, index) => (
+                            <tr key={index}>
+                                <td>{member.id}</td>
+                                <td>{member.name}</td>
+                            </tr>
+                        ))}
+                        </tbody>
+                    </Table>
+                </div>
+            )}
         </>
     );
 }

@@ -1,8 +1,14 @@
-import React, { useState } from 'react';
-import { Card, ListGroup, Button, Modal } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import React from 'react';
+import { Card, Button } from 'react-bootstrap';
+import { Link, useNavigate }  from 'react-router-dom';
 
-const TeamList = ({ teams, setTeams }) => {
+const TeamList = ({ teams, setTeams , handleAddMemberClick}) => {
+    const navigate = useNavigate();
+
+    const handleDeleteTeam = (index) => {
+        const updatedTeams = teams.filter((team, teamIndex) => teamIndex !== index);
+        setTeams(updatedTeams);
+    }
 
     return (
         <div>
@@ -22,6 +28,7 @@ const TeamList = ({ teams, setTeams }) => {
                                 <Button
                                     variant="outline-danger"
                                     className="mt-3"
+                                    onClick={() => handleDeleteTeam(index)} // Pass the index of the team to be deleted team
                                 >
                                     Delete
                                 </Button>
@@ -29,6 +36,9 @@ const TeamList = ({ teams, setTeams }) => {
                                     variant="primary"
                                     style={{marginLeft: '5px' }}
                                     className="mt-3"
+                                    onClick={() => {
+                                        navigate(`/teamOverView`);
+                                    }}
 
                                 >
                                     Details
@@ -38,7 +48,7 @@ const TeamList = ({ teams, setTeams }) => {
                     </Card>
                 ))}
             </div>
-            <Link to="/task-messaging"><Button>Back to Workspace</Button></Link>
+            <Link to="/"><Button>Back to Workspace</Button></Link>
         </div>
     );
 };
