@@ -1,9 +1,13 @@
 import React from 'react';
 import { Card, Button } from 'react-bootstrap';
-import { Link, useNavigate }  from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
-const TeamList = ({ teams, setTeams , handleAddMemberClick}) => {
-    const navigate = useNavigate();
+const TeamList = ({ toggle, teams, setTeams, handleAddMemberClick }) => {
+    // const navigate = useNavigate();
+
+    const spaceToggle = (data) => {
+        toggle(false,data)
+    }
 
     const handleDeleteTeam = (index) => {
         const updatedTeams = teams.filter((team, teamIndex) => teamIndex !== index);
@@ -34,10 +38,10 @@ const TeamList = ({ teams, setTeams , handleAddMemberClick}) => {
                                 </Button>
                                 <Button
                                     variant="primary"
-                                    style={{marginLeft: '5px' }}
+                                    style={{ marginLeft: '5px' }}
                                     className="mt-3"
                                     onClick={() => {
-                                        navigate(`/teamOverView`);
+                                        spaceToggle(team.name)
                                     }}
 
                                 >

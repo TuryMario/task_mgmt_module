@@ -74,9 +74,9 @@ export default function TaskListTable({ taskListData }) {
             {/*    </Button>*/}
             {/*</div>*/}
             <div
-                style={{
-                    height: "50px",
-                }}
+                // style={{
+                //     height: "50px",
+                // }}
             >
                 <MaterialReactTable
                     columns={columns}

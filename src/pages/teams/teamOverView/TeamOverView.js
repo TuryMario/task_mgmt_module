@@ -18,18 +18,28 @@ export default function TeamOverView() {
                     <TeamMember />
                 </Container>
             </div>
-            <div>
+            <div className='mt-3'>
                 <Container>
+                    <hr/>
                     <Row>
-                        <Col sm={1} className="d-flex justify-content-center text-center">Create Task</Col>
+                        <Col sm={2} className="d-flex justify-content-center text-center mt-2">
+                            <h4><strong>Create Task</strong></h4>
+                        </Col>
                         <Col sm={4}>
-                            <Button onClick={()=>setTaskModalShow(true)}>+</Button>
-                            <CreateTask showModal={taskModalShow}/>
+                            <Button variant="outline-primary" onClick={()=>setTaskModalShow(true)}>+</Button>
+                            {/* <div> */}
+                                <CreateTask showModal={taskModalShow} />
+                            {/* </div> */}
                         </Col>
                     </Row>
                 </Container>
-                <Container className="mt-3">
-                    <TaskListTable />
+                <Container >
+                    <Row>
+                        <Col>
+                            
+                            <TaskListTable />
+                        </Col>
+                    </Row>
                 </Container>
             </div>
         </>

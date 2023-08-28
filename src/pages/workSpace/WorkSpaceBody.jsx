@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Card, Col, Row, Button } from "react-bootstrap";
 import CreateTeamHandler from "../teams/CreateTeamHandler";
+import TeamOverView from "../teams/teamOverView/TeamOverView"
 
 function WorkSpaceBody({ fromWorkSpace, toggle, teamInfo }) {
   const [cards, setCards] = useState([]);
@@ -101,7 +102,9 @@ function WorkSpaceBody({ fromWorkSpace, toggle, teamInfo }) {
         ) : (
           <CreateTeamHandler toggle={spaceToggle} />
         )
-      ) : null}
+      ) : (
+        <TeamOverView />
+      )}
     </>
   );
 }
