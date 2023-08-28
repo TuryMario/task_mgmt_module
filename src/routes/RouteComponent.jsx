@@ -9,19 +9,14 @@ import TaskListTable from '../components/taskListTable/TaskListTable';
 // import TaskStatusDetails from '../pages/tasks/taskDetails/taskStatusDetails/TaskStatusDetails';
 // import MainTaskDetailsPage from "../pages/tasks/taskDetails/MainTaskDetailsPage";
 // import TeamOverView from "../pages/teams/teamOverView/TeamOverView";
-import TeamMember from "../components/createTask/teamMembers/TeamMember";
+// import TeamMember from "../components/createTask/teamMembers/TeamMember";
 function RouteComponent() {
   return (
     <div>
       <Routes>
         <Route path="/" element={<WorkSpace />} />
-        {/* <Route path="/workspacedetails" element={<WorkSpaceDetails />} /> */}
-        {/* <Route path="/maintaskdetailspage" element={<MainTaskDetailsPage />} /> */}
         <Route path="/create-team-handler" element={<CreateTeamHandler />} />
         <Route path="/view-tasks" element={<TaskListTable />} />
-
-          {/* <Route path="/teamOverView" element={<TeamOverView />} /> */}
-          <Route path="/team-member" element={<TeamMember />} />
       </Routes>
     </div>
   );

@@ -19,6 +19,7 @@ const SearchBar = ({ onSearch, onClose, onSelectMember, searchResults }) => {
         onSelectMember(member);
         setSearchQuery('');
         onClose(); // Close the search bar after selecting a member
+        console.log(member);
     };
 
     return (
@@ -31,19 +32,20 @@ const SearchBar = ({ onSearch, onClose, onSelectMember, searchResults }) => {
                         value={searchQuery}
                         onChange={handleInputChange}
                     />
-                    <Button variant="outline-secondary" onClick={handleSearchClose}>
-                        Cancel
-                    </Button>
+
                 </Form>
                 {/* Display search results here */}
                 {/* Example: */}
-                 <ul>
+                <ul className="mt-2 memberList" style={{ backgroundColor: "#EAF2F8"}}>
                     {searchResults.map(member => (
                         <li key={member.id} onClick={() => handleMemberSelect(member)}>
-                            {member.name}
+                            {member.id}{" "} {" "}{member.name}
                         </li>
                     ))}
                 </ul>
+                <Button className="mt-2" variant="outline-danger" onClick={handleSearchClose}>
+                    Cancel
+                </Button>
             </Card.Body>
         </Card>
     );

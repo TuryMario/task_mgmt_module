@@ -8,6 +8,7 @@ export default function TaskListTable({ taskListData }) {
 
     useEffect(() => {
         setTableData(taskListData);
+        // console.log( "Task list data ii..",taskListData);
     }, [taskListData]);
 
     const handleSaveRow = async ({ exitEditingMode, row, values }) => {
@@ -90,6 +91,7 @@ export default function TaskListTable({ taskListData }) {
                     muiTablePaginationProps={{
                         rowsPerPageOptions: [5, 10],
                     }}
+                    
                 />
             </div>
         </>

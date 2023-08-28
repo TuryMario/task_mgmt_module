@@ -1,4 +1,5 @@
 import React from 'react';
+import { useState } from 'react';
 
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -11,6 +12,11 @@ import TeamMember from "../../../components/createTask/teamMembers/TeamMember";
 
 export default function TeamOverView() {
     const [taskModalShow, setTaskModalShow] = React.useState(false);
+    const [taskData, setTaskData]= useState([])
+
+    const taskInfo = (data) => {
+        setTaskData(data);
+    }
     return (
         <>
             <div>
@@ -20,15 +26,17 @@ export default function TeamOverView() {
             </div>
             <div className='mt-3'>
                 <Container>
-                    <hr/>
                     <Row>
-                        <Col sm={2} className="d-flex justify-content-center text-center mt-2">
-                            <h4><strong>Create Task</strong></h4>
-                        </Col>
+                        {/* <Col sm={2} className="d-flex justify-content-center text-center mt-2">
+                            
+                        </Col> */}
+                        <h3>2. <strong>Tasks</strong></h3>
+                        <hr />
+
                         <Col sm={4}>
-                            <Button variant="outline-primary" onClick={()=>setTaskModalShow(true)}>+</Button>
+                            <Button variant="outline-primary" className="mb-2" onClick={()=>setTaskModalShow(true)}>Add Task</Button>
                             {/* <div> */}
-                                <CreateTask showModal={taskModalShow} />
+                            <CreateTask taskData={taskInfo} showModal={taskModalShow} />
                             {/* </div> */}
                         </Col>
                     </Row>
@@ -37,7 +45,7 @@ export default function TeamOverView() {
                     <Row>
                         <Col>
                             
-                            <TaskListTable />
+                            <TaskListTable taskListData={taskData} />
                         </Col>
                     </Row>
                 </Container>

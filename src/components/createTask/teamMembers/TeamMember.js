@@ -1,10 +1,10 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import {Button, Modal} from 'react-bootstrap';
+import { Button, Modal } from 'react-bootstrap';
 import SearchBar from '../../../pages/teams/SearchBar';
-import {Table} from "@mui/material";
+import { Table } from "@mui/material";
 
 const membersList = [
     { id: 1, name: 'John Doe' },
@@ -83,11 +83,31 @@ export default function TeamMember({ teams, setTeams }) {
         <>
             <Container>
                 <Row>
-                    <Col sm={2} className="d-flex justify-content-center text-center">
-                        Add new Member
-                    </Col>
+                    <h3>1. <strong> Members</strong></h3>
+                    <hr/>
                     <Col sm={4}>
-                        <Button onClick={handleAddMemberClick}>+</Button>
+                        <Button variant="outline-primary" onClick={handleAddMemberClick}>Add Member </Button>
+                        {addedMembers.length >= 0 && (
+                            <div>
+                                <h5 className='mt-2'>Available Members List</h5>
+                                <Table>
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Name</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {addedMembers.map((member, index) => (
+                                            <tr key={index}>
+                                                <td>{member.id}</td>
+                                                <td>{member.name}</td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </Table>
+                            </div>
+                        )}
                     </Col>
                 </Row>
             </Container>
@@ -111,28 +131,8 @@ export default function TeamMember({ teams, setTeams }) {
                     ) : null}
                 </Modal.Body>
             </Modal>
-            <br/>
-            {addedMembers.length >= 0 && (
-                <div>
-                    <h3>Added Members</h3>
-                    <Table>
-                        <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Name</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {addedMembers.map((member, index) => (
-                            <tr key={index}>
-                                <td>{member.id}</td>
-                                <td>{member.name}</td>
-                            </tr>
-                        ))}
-                        </tbody>
-                    </Table>
-                </div>
-            )}
+            <br />
+
         </>
     );
 }

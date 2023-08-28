@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { Card, Button, Form } from 'react-bootstrap';
-import TaskListTable from "../../components/taskListTable/TaskListTable";
+// import TaskListTable from "../../components/taskListTable/TaskListTable";
 // import ProgressBar from "react-bootstrap/ProgressBar";
 import Stack from "react-bootstrap/Stack";
 
-export default function Tasks() {
+export default function Tasks({taskInfo}) {
     const [task, setTask] = useState([]);
     const [taskInput, setTaskInput] = useState({
         name: "",
@@ -17,6 +17,7 @@ export default function Tasks() {
 
     const handleTaskCreate = () => {
         setTask([...task, taskInput]);
+        taskInfo(task);
         setTaskInput({
             name: "",
             priority: "",
@@ -42,7 +43,7 @@ export default function Tasks() {
         <>
             <Card>
                 <Card.Body>
-                    <Card.Title><strong>Create New Task</strong></Card.Title>
+                    {/* <Card.Title><strong>Create New Task</strong></Card.Title> */}
                     <Form>
                         <Form.Group controlId="taskName">
                             <Form.Label><strong>Task Name</strong></Form.Label>
