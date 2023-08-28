@@ -1,59 +1,79 @@
 import React from 'react';
+import { useEffect, useState } from 'react';
 import { Card, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { Container, Row, Col } from 'react-bootstrap';
+
 
 const TeamList = ({ toggle, teams, setTeams, handleAddMemberClick }) => {
-    // const navigate = useNavigate();
-
+    const [teamData, setTeamData] = useState([]);
     const spaceToggle = (data) => {
-        toggle(false,data)
+        toggle(false, data);
     }
-
+    useEffect(() => {
+        setTeamData(teams)
+    }, [teams]);
+    // console.log(teams);
     const handleDeleteTeam = (index) => {
-        const updatedTeams = teams.filter((team, teamIndex) => teamIndex !== index);
+        const updatedTeams = teamData.filter((team, teamIndex) => teamIndex !== index);
         setTeams(updatedTeams);
     }
 
     return (
-        <div>
-            <h2>Team List</h2>
-            <div className="d-flex flex-wrap">
-                {teams.map((team, index) => (
-                    <Card key={index} className="m-2" style={{ width: '18rem' }}>
-                        <Card.Body>
-                            <Card.Title>{team.name}</Card.Title>
-                            {/*<Card.Subtitle className="mb-2 text-muted">Members</Card.Subtitle>*/}
-                            {/*<ListGroup>*/}
-                            {/*    {team.members.map((member, memberIndex) => (*/}
-                            {/*        <ListGroup.Item key={memberIndex}>{member.name}</ListGroup.Item>*/}
-                            {/*    ))}*/}
-                            {/*</ListGroup>*/}
-                            <div className="text-left">
-                                <Button
-                                    variant="outline-danger"
-                                    className="mt-3"
-                                    onClick={() => handleDeleteTeam(index)} // Pass the index of the team to be deleted team
-                                >
-                                    Delete
-                                </Button>
-                                <Button
-                                    variant="primary"
-                                    style={{ marginLeft: '5px' }}
-                                    className="mt-3"
-                                    onClick={() => {
-                                        spaceToggle(team.name)
-                                    }}
+        <>
+            <div>
+                <h2>Team List</h2>
+                <div className="d-flex flex-wrap">
+                    {teamData.length !== 0 ? (
+                        teamData.map((team, index) => (
+                            <Card key={index} className="mt-2 mb-2" style={{ width: '18rem' }}>
 
-                                >
-                                    Details
-                                </Button>
-                            </div>
-                        </Card.Body>
-                    </Card>
-                ))}
+                                <Card.Body className=' text-center'>
+                                    <div><h3>{team.name}</h3></div>
+                                    <div>{team.description}</div>
+
+                                </Card.Body>
+                                <Card.Footer>
+                                    <div className="d-flex justify-content-end">
+                                        <Button
+                                            variant="outline-danger"
+                                            onClick={() => handleDeleteTeam(index)}
+                                        >
+                                            Delete
+                                        </Button>
+                                        <Button
+                                            variant="primary"
+                                            style={{ marginLeft: '5px' }}
+                                            onClick={() => {
+                                                spaceToggle(team.name);
+                                            }}
+                                        >
+                                            Details
+                                        </Button>
+                                    </div>
+                                </Card.Footer>
+
+                            </Card>
+                        ))
+                    ) : (
+                        <div className="mb-2" style={{ border: "1px solid black", borderRadius: "5px", width: "100%" }}>
+                            <Container className='mt-5 mb-5 text-center' fluid>
+                                <Row >
+                                    <Col style={{ color: "red" }} ><em>No teams currently</em></Col>
+                                </Row>
+                            </Container>
+                        </div>
+                    )}
+                </div>
+
             </div>
-            <Link to="/"><Button>Back to Workspace</Button></Link>
-        </div>
+            <div>
+                <Link to="/">
+                    <Button>Back to Workspace</Button>
+                </Link>
+            </div>
+        </>
     );
 };
+
 export default TeamList;

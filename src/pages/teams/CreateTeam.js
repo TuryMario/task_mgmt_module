@@ -1,41 +1,47 @@
 import React, { useState } from 'react';
-import { Modal, Button, Form } from 'react-bootstrap';
+import { Modal, Button, Form, Row, Col } from 'react-bootstrap';
+import Container from "react-bootstrap/Container"
 
 const CreateTeam = ({ onCreateTeam }) => {
     const [showModal, setShowModal] = useState(false);
     const [teamName, setTeamName] = useState('');
     const [description, setDescription] = useState('');
-    const [selectedMember, setSelectedMember] = useState(null);
+    // const [selectedMember, setSelectedMember] = useState(null);
 
-    const handleMemberSelect = (member) => {
-        setSelectedMember(member);
-    };
+    // const handleMemberSelect = (member) => {
+    //     setSelectedMember(member);
+    // };
 
     const handleClose = () => {
         setShowModal(false);
-        setSelectedMember(null);
+        // setSelectedMember(null);
     };
 
     const handleCreateClick = () => {
         const newTeam = {
             name: teamName,
             description: description,
-            members: selectedMember ? [selectedMember] : [],
+            // members: selectedMember ? [selectedMember] : [],
         };
         onCreateTeam(newTeam);
         setTeamName('');
         setDescription('');
-        setSelectedMember(null);
+        // setSelectedMember(null);
         handleClose();
     };
 
     return (
         <div>
-            <h2>Create New Team</h2>
-            <Button variant="primary" onClick={() => setShowModal(true)}>
-                Create Team
-            </Button>
-
+            <Container>
+                <Row>
+                    {/* <Col  sm={3}><h5>Create Team</h5></Col> */}
+                    <Col>
+                        <Button variant="outline-primary" onClick={() => setShowModal(true)}>
+                            Create Team
+                        </Button>
+                    </Col>
+                </Row>
+            </Container>
             <Modal show={showModal} onHide={handleClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>Create Team</Modal.Title>

@@ -17,8 +17,10 @@ const CreateTeamHandler = ({ toggle }) => {
 
     return (
         <div>
-            <h1 className="text-center">Teams</h1>
+            <h1 className="text-center">Available Teams</h1>
+            {/* <hr/> */}
             <div className="container">
+                <hr/>
                 <CreateTeam onCreateTeam={handleCreateTeam} />
                 <TeamList toggle={spaceToggle}  teams={teams} setTeams={setTeams} />
             </div>
