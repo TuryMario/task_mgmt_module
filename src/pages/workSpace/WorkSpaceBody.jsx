@@ -1,10 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { Card, Col, Row, Button } from "react-bootstrap";
-// import { Link } from "react-router-dom";
 import CreateTeamHandler from "../teams/CreateTeamHandler";
-function WorkSpaceBody({ fromWorkSpace, toggle }) {
+
+function WorkSpaceBody({ fromWorkSpace, toggle, teamInfo }) {
   const [cards, setCards] = useState([]);
+  const [overallDisplay, setOverallDisplay] = useState(true);
   const [spaceInstanceBody, setSpaceInstanceBody] = useState(true);
+
+  const spaceToggle = (mn, teamName) => {
+    setOverallDisplay(!overallDisplay);
+    console.log(mn, teamName);
+    teamInfo(teamName);
+  };
 
   // fn to remove duplicates
   const removeDuplicates = (arr) => {
@@ -22,7 +29,7 @@ function WorkSpaceBody({ fromWorkSpace, toggle }) {
 
   useEffect(() => {
     setCards(uniqueWorkspaceData);
-  }, [uniqueWorkspaceData]);
+  }, [fromWorkSpace, uniqueWorkspaceData]);
 
   const handleName = (data) => {
     toggle(data);
@@ -31,57 +38,70 @@ function WorkSpaceBody({ fromWorkSpace, toggle }) {
 
   return (
     <>
-      {spaceInstanceBody ? (<Row xs={3} md={3} className="g-4">
-        {cards.map((card, index) => (
-          <Col key={index}>
-            <Card border="info" className="text-center">
-              <Card.Body>
-                <div
-                  style={{
-                    height: "100px",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                >
-                  <div
-                    style={{
-                      width: "40px",
-                      height: "40px",
-                      borderRadius: "50%",
-                      backgroundColor: "grey",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}
-                  >
-                    <span style={{ fontSize: "24px", color: "white" }}>C</span>
-                  </div>
-                </div>
-                <h2>{card.spaceName}</h2>
-                <h5>Space Category</h5>
-                <p>
-                  <em>{card.spaceDescription}</em>
-                </p>
-              </Card.Body>
-              <Card.Footer>
-                  <Button
-                  onClick={() => {
-                      const name = (
-                        <div>
-                          Space :<span style={{color:"blue"}}> {card.spaceName}</span>
-                        </div>
-                      );
-                      handleName(name);
-                    }}
-                    variant="outline-secondary">
-                    <h6>Manage Space</h6>
-                  </Button>
-              </Card.Footer>
-            </Card>
-          </Col>
-        ))}
-      </Row>): <CreateTeamHandler /> }
+      {overallDisplay ? (
+        spaceInstanceBody ? (
+          <Row xs={3} md={3} className="g-4">
+            {cards.map((card, index) => (
+              <Col key={index}>
+                <Card border="info" className="text-center">
+                  <Card.Body>
+                    <div
+                      style={{
+                        height: "100px",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}
+                    >
+                      <div
+                        style={{
+                          width: "40px",
+                          height: "40px",
+                          borderRadius: "50%",
+                          backgroundColor: "grey",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                        }}
+                      >
+                        <span style={{ fontSize: "24px", color: "white" }}>
+                          C
+                        </span>
+                      </div>
+                    </div>
+                    <h2>{card.spaceName}</h2>
+                    <h5>Space Category</h5>
+                    <p>
+                      <em>{card.spaceDescription}</em>
+                    </p>
+                  </Card.Body>
+                  <Card.Footer>
+                    <Button
+                      onClick={() => {
+                        const name = (
+                          <div>
+                            Space :
+                            <span style={{ color: "blue" }}>
+                              {" "}
+                              {card.spaceName}
+                            </span>
+                          </div>
+                        );
+                        handleName(name);
+                      }}
+                      variant="outline-secondary"
+                    >
+                      <h6>Manage Space</h6>
+                    </Button>
+                  </Card.Footer>
+                </Card>
+              </Col>
+            ))}
+          </Row>
+        ) : (
+          <CreateTeamHandler toggle={spaceToggle} />
+        )
+      ) : null}
     </>
   );
 }

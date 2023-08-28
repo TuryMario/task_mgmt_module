@@ -4,9 +4,14 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import TeamList from "../../components/teamList/TeamList";
 import SearchBar from "./SearchBar";
 
-const CreateTeamHandler = () => {
+const CreateTeamHandler = ({ toggle }) => {
     const [teams, setTeams] = useState([]);
     const [searchResults, setSearchResults] = useState([]);
+    const [spaceBody, setSpaceBody] = useState(true);
+    const spaceToggle = (newValue,data) => {
+        setSpaceBody(newValue);
+        toggle(!spaceBody, data);
+    }
 
     const handleCreateTeam = newTeam => {
         setTeams([...teams, newTeam]);
@@ -29,7 +34,7 @@ const CreateTeamHandler = () => {
             <div className="container">
                 <CreateTeam onCreateTeam={handleCreateTeam} />
                 <SearchBar onSearch={handleSearchMembers} />
-                <TeamList teams={searchResults.length > 0 ? searchResults : teams} />
+                <TeamList toggle={spaceToggle}  teams={searchResults.length > 0 ? searchResults : teams} />
             </div>
         </div>
     );

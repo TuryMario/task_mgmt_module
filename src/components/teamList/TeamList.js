@@ -1,7 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Card, ListGroup, Button } from 'react-bootstrap';
 
-const TeamList = ({ teams }) => {
+const TeamList = ({ teams, toggle }) => {
+    const [spaceBody, setSpaceBody] = useState(true);
+    const spaceHandler = (data) => {
+        // console.log(data)
+        setSpaceBody(!spaceBody);
+        toggle(spaceBody, data);
+    }
+
     return (
         <div>
             <h2>Team List</h2>
@@ -19,6 +26,7 @@ const TeamList = ({ teams }) => {
                             <Button variant="secondary" className="mt-3">
                                 Add new member
                             </Button>
+                            <Button onClick={() => spaceHandler(team.name)}>details</Button>
                         </Card.Body>
                     </Card>
                 ))}
