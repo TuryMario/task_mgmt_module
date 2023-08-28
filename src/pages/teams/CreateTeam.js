@@ -60,14 +60,6 @@ const CreateTeam = ({ onCreateTeam }) => {
                                 onChange={(e) => setDescription(e.target.value)}
                             />
                         </Form.Group>
-                        {/*<Form.Group controlId="selectedMember">*/}
-                        {/*    <Form.Label>Selected Member</Form.Label>*/}
-                        {/*    {selectedMember && (*/}
-                        {/*        <div>*/}
-                        {/*            {selectedMember.name} ({selectedMember.email})*/}
-                        {/*        </div>*/}
-                        {/*    )}*/}
-                        {/*</Form.Group>*/}
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>

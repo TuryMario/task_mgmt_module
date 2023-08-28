@@ -9,25 +9,20 @@ import {
   MDBCardFooter,
   MDBIcon,
   MDBBtn,
-  MDBScrollbar,
+  // MDBScrollbar,
 } from "mdb-react-ui-kit";
 
 export function TaskMessaging() {
   return (
-    <MDBContainer fluid className="py-5" style={{ backgroundColor: "#eee" }}>
+    <MDBContainer fluid >
       <MDBRow className="d-flex justify-content-center">
-        <MDBCol md="10" lg="8" xl="6">
+        {/*<MDBCol md="10" lg="8" xl="6">*/}
           <MDBCard id="chat2" style={{ borderRadius: "15px" }}>
-            <MDBCardHeader className="d-flex justify-content-between align-items-center p-3">
-              <h5 className="mb-0">Comments</h5>
-              <MDBBtn color="primary" size="sm" rippleColor="dark">
-                Type your comment
-              </MDBBtn>
-            </MDBCardHeader>
-            <MDBScrollbar
-              suppressScrollX
-              style={{ position: "relative", height: "400px" }}
-            >
+
+            {/*<MDBScrollbar*/}
+            {/*  suppressScrollX*/}
+            {/*  style={{ position: "relative", height: "400px" }}*/}
+            {/*>*/}
               <MDBCardBody>
                 <div className="d-flex flex-row justify-content-start">
                   <img
@@ -138,7 +133,7 @@ export function TaskMessaging() {
                   />
                 </div>
               </MDBCardBody>
-            </MDBScrollbar>
+            {/*</MDBScrollbar>*/}
             <MDBCardFooter className="text-muted d-flex justify-content-start align-items-center p-3">
               <img
                 src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3-bg.webp"
@@ -162,7 +157,7 @@ export function TaskMessaging() {
               </a>
             </MDBCardFooter>
           </MDBCard>
-        </MDBCol>
+        {/*</MDBCol>*/}
       </MDBRow>
     </MDBContainer>
   )
