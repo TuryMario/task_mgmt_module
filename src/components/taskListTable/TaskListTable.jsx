@@ -1,103 +1,118 @@
 import React, { useState, useEffect } from "react";
 import { useMemo } from "react";
-// import Button from "react-bootstrap/Button";
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
+import MainTaskDetailsPage from "../../pages/tasks/taskDetails/MainTaskDetailsPage";
 import MaterialReactTable from "material-react-table";
 
 export default function TaskListTable({ taskListData }) {
-    const [tableData, setTableData] = useState([]);
+  const [tableData, setTableData] = useState([]);
+  const [selectedRow, setSelectedRow] = useState(null);
+  const [show, setShow] = useState(false);
 
-    useEffect(() => {
-        setTableData(taskListData);
-        // console.log( "Task list data ii..",taskListData);
-    }, [taskListData]);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
-    const handleSaveRow = async ({ exitEditingMode, row, values }) => {
-        // Clone the existing tableData array
-        const updatedTableData = [...tableData];
+  useEffect(() => {
+    setTableData(taskListData);
+  }, [taskListData]);
 
-        // Update the values for the row
-        updatedTableData[row.index] = values;
+  const handleSaveRow = async ({ exitEditingMode, row, values }) => {
+    const updatedTableData = [...tableData];
+    updatedTableData[row.index] = values;
+    setTableData(updatedTableData);
+    exitEditingMode();
+  };
 
-        // Update the state with the updated data
-        setTableData(updatedTableData);
+  const handleRowClick = (row) => {
+    setSelectedRow(row);
+    handleShow();
+  };
 
-        exitEditingMode(); // Required to exit editing mode
-    };
+  const columns = useMemo(
+    () => [
+      {
+        accessorKey: "name",
+        header: "Title",
+        size: 200,
+        Header: <span style={{ color: "blue" }}>Title</span>,
+      },
+      {
+        accessorKey: "priority",
+        header: "Task Priority",
+        size: 200,
+        Header: <span style={{ color: "blue" }}>Priority</span>,
+      },
+      {
+        accessorKey: "description",
+        header: "Description",
+        size: 200,
+        Header: <span style={{ color: "blue" }}>Description</span>,
+      },
+      {
+        accessorKey: "comment",
+        header: "Key Note/Comment",
+        size: 200,
+        Header: <span style={{ color: "blue" }}>Key Note/Comment</span>,
+      },
+      {
+        accessorKey: "startDate",
+        header: "Start Date",
+        size: 200,
+        Header: <span style={{ color: "blue" }}>Start Date</span>,
+      },
+      {
+        accessorKey: "dueDate",
+        header: "Due Date",
+        size: 200,
+        Header: <span style={{ color: "blue" }}>Due Date</span>,
+      },
+    ],
+    []
+  );
 
-    const columns = useMemo(
-        () => [
-            {
-                accessorKey: "name",
-                header: "Title",
-                size: 200,
-                Header: <span style={{ color: "blue" }}>Title</span>,
-            },
-            {
-                accessorKey: "priority",
-                header: "Task Priority",
-                size: 200,
-                Header: <span style={{ color: "blue" }}>Priority</span>,
-            },
-            {
-                accessorKey: "description",
-                header: "Description",
-                size: 200,
-                Header: <span style={{ color: "blue" }}>Description</span>,
-            },
-            {
-                accessorKey: "comment",
-                header: "Key Note/Comment",
-                size: 200,
-                Header: <span style={{ color: "blue" }}>Key Note/Comment</span>,
-            },
-            {
-                accessorKey: "startDate",
-                header: "Start Date",
-                size: 200,
-                Header: <span style={{ color: "blue" }}>Start Date</span>,
-            },
-            {
-                accessorKey: "dueDate",
-                header: "Due Date",
-                size: 200,
-                Header: <span style={{ color: "blue" }}>Due Date</span>,
-            },
-        ],
-        []
-    );
-
-    return (
-        <>
-            {/*<div>*/}
-            {/*    <Button style={{ marginBottom: "10px" }}>*/}
-            {/*        {" "}*/}
-            {/*        <span style={{ color: "blue", hreight: "10px" }}>+ </span>Add Member*/}
-            {/*    </Button>*/}
-            {/*</div>*/}
-            <div
-                // style={{
-                //     height: "50px",
-                // }}
-            >
-                <MaterialReactTable
-                    columns={columns}
-                    data={tableData}
-                    initialState={{ density: "compact" }}
-                    enableDensityToggle={false}
-                    renderTopToolbarCustomActions={() => <h3>Tasks Table</h3>}
-                    editingMode="row"
-                    enableEditing
-                    onEditingRowSave={handleSaveRow}
-                    muiTablePaginationProps={{
-                        rowsPerPageOptions: [5, 10],
-                    }}
-                    
-                />
-            </div>
-        </>
-    );
+  return (
+    <>
+      <div>
+        <div>
+          <MaterialReactTable
+            columns={columns}
+            data={tableData}
+            initialState={{ density: "compact" }}
+            enableDensityToggle={false}
+            renderTopToolbarCustomActions={() => <h3>Tasks Table</h3>}
+            editingMode="row"
+            enableEditing
+            onEditingRowSave={handleSaveRow}
+            muiTablePaginationProps={{
+              rowsPerPageOptions: [5, 10],
+            }}
+            onRowClick={handleRowClick}
+          />
+        </div>
+        <div>
+          <Modal
+            show={show}
+            onHide={handleClose}
+            backdrop="static"
+            keyboard={false}
+          >
+            <Modal.Header closeButton>
+              <Modal.Title>Task Details</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              {/* Passing the selected row data */}
+              <MainTaskDetailsPage rowData={selectedRow} />{" "}
+            </Modal.Body>
+            <Modal.Footer>
+              <Button variant="secondary" onClick={handleClose}>
+                Close
+              </Button>
+              <Button variant="primary">Understood</Button>
+            </Modal.Footer>
+          </Modal>
+        </div>
+      </div>
+    </>
+  );
 }
-
-
-
-
