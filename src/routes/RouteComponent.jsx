@@ -5,9 +5,9 @@ import WorkSpace from "../pages/workSpace/WorkSpace";
 // import MainTaskDetailsPage from "../pages/tasks/taskDetails/MainTaskDetailsPage";
 import CreateTeamHandler from "../pages/teams/CreateTeamHandler";
 import TaskListTable from '../components/taskListTable/TaskListTable';
-// import TaskMessaging from '../pages/tasks/taskDetails/taskMessaging/TaskMessaging';
+import TaskMessaging from '../pages/tasks/taskDetails/taskMessaging/TaskMessaging';
 // import TaskStatusDetails from '../pages/tasks/taskDetails/taskStatusDetails/TaskStatusDetails';
-// import MainTaskDetailsPage from "../pages/tasks/taskDetails/MainTaskDetailsPage";
+import MainTaskDetailsPage from "../pages/tasks/taskDetails/MainTaskDetailsPage";
 // import TeamOverView from "../pages/teams/teamOverView/TeamOverView";
 // import TeamMember from "../components/createTask/teamMembers/TeamMember";
 function RouteComponent() {
@@ -16,7 +16,7 @@ function RouteComponent() {
       <Routes>
         <Route path="/" element={<WorkSpace />} />
         <Route path="/create-team-handler" element={<CreateTeamHandler />} />
-        <Route path="/view-tasks" element={<TaskListTable />} />
+        <Route path="/MainTaskDetailsPage" element={<MainTaskDetailsPage />} />
       </Routes>
     </div>
   );
