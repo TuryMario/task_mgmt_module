@@ -2,14 +2,15 @@ import React, { useState } from 'react';
 import CreateTeam from '../teams/CreateTeam';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import TeamList from "../../components/teamList/TeamList";
+import { useParams } from 'react-router-dom';
+import WorkSpaceNavBar from '../../components/NavBar/WorkSpaceNavBar';
 
 const CreateTeamHandler = ({ toggle }) => {
+    const { name } = useParams();
     const [teams, setTeams] = useState([]);
-    const [spaceBody, setSpaceBody] = useState(true);
-    const spaceToggle = (newValue,data) => {
-        setSpaceBody(newValue);
-        toggle(!spaceBody, data);
-    }
+    // const [spaceBody, setSpaceBody] = useState(true);
+    
+    // console.log("Name is ,,,,,,,,",data);
 
     const handleCreateTeam = newTeam => {
         setTeams([...teams, newTeam]);
@@ -17,12 +18,17 @@ const CreateTeamHandler = ({ toggle }) => {
 
     return (
         <div>
+            <WorkSpaceNavBar
+                btn={ false}
+                spaceHead={name}
+                teamName={null}
+            />
             <h1 className="text-center">Available Teams</h1>
             {/* <hr/> */}
             <div className="container">
-                <hr/>
+                <hr />
                 <CreateTeam onCreateTeam={handleCreateTeam} />
-                <TeamList toggle={spaceToggle}  teams={teams} setTeams={setTeams} />
+                <TeamList  teams={teams} setTeams={setTeams} />
             </div>
         </div>
     );

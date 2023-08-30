@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { BsPlusCircle } from "react-icons/bs";
 import { Button } from "react-bootstrap";
-import CreateSpaceModal from "../CreateSpaceModal";
+import CreateSpaceModal from "../../pages/workSpace/CreateSpaceModal";
 
-function CreateButton({createData }) {
+function CreateButton({ createData }) {
   const [showModal, setShowModal] = useState(false);
   const [data, setData] = useState([]);
 
@@ -12,7 +12,6 @@ function CreateButton({createData }) {
     setData([...data, newData]);
   };
   createData(data);
- 
 
   return (
     <>

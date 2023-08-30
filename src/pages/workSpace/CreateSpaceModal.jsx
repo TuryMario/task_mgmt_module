@@ -97,7 +97,7 @@ export default function CreateSpaceModal(props) {
 
               <Row>
                 <FloatingLabel
-                  controlId="space_description"
+                  controlId="description"
                   label={
                     <span
                       style={{

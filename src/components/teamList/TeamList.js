@@ -5,15 +5,15 @@ import { Link } from 'react-router-dom';
 import { Container, Row, Col } from 'react-bootstrap';
 
 
-const TeamList = ({ toggle, teams, setTeams, handleAddMemberClick }) => {
+const TeamList = ({ teams, setTeams, handleAddMemberClick }) => {
     const [teamData, setTeamData] = useState([]);
-    const spaceToggle = (data) => {
-        toggle(false, data);
-    }
     useEffect(() => {
         setTeamData(teams)
     }, [teams]);
-    // console.log(teams);
+    // console.log("Teams are..", teams);
+    // console.log("SetTeams are..", setTeams);
+    // console.log("Teams are..", teams);
+
     const handleDeleteTeam = (index) => {
         const updatedTeams = teamData.filter((team, teamIndex) => teamIndex !== index);
         setTeams(updatedTeams);
@@ -41,15 +41,15 @@ const TeamList = ({ toggle, teams, setTeams, handleAddMemberClick }) => {
                                         >
                                             Delete
                                         </Button>
-                                        <Button
-                                            variant="primary"
-                                            style={{ marginLeft: '5px' }}
-                                            onClick={() => {
-                                                spaceToggle(team.name);
-                                            }}
-                                        >
-                                            Details
-                                        </Button>
+                                        <Link to={`/space/teams/team/${team.name}`}>
+                                            <Button
+                                                variant="primary"
+                                                style={{ marginLeft: '5px' }}
+                                            >
+                                                Details
+                                            </Button>
+                                        </Link>
+
                                     </div>
                                 </Card.Footer>
 

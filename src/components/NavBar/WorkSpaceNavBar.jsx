@@ -11,7 +11,6 @@ function WorkSpaceNavBar({ spaceHead,btn,teamName, btnData }) {
   const handleData = (data) => {
     setData(data);
   };
-  // console.log(team);
   useEffect(() => {
     setTeam(teamName);
   }, [teamName]);
@@ -19,17 +18,19 @@ function WorkSpaceNavBar({ spaceHead,btn,teamName, btnData }) {
     setButtonShow(btn);
   },[btn]);
 
-  btnData(data);
+  btnData=data;
   return (
     <div>
       <Navbar className="bg-body-tertiary mb-4">
         <Container>
           <Navbar.Brand>
             {team === null ? (
-              <h2>{spaceHead}</h2>
+              <h2>
+                Space Name : <span style={{ color: "red" }}>{spaceHead}</span>
+              </h2>
             ) : (
               <h2>
-                Team Name : <span style={{ color: "red" }}>{team}</span>
+                Team Name : <span style={{ color: "red" }}>{spaceHead}</span>
               </h2>
             )}
           </Navbar.Brand>
