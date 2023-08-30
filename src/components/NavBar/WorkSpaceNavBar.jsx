@@ -4,18 +4,16 @@ import CreateButton from "./CreateButton";
 import { useState } from "react";
 
 function WorkSpaceNavBar({ spaceHead, btn, teamName, btnData }) {
-  const [data, setData] = useState([]);
+  // const [data, setData] = useState([]);
   const [buttonShow, setButtonShow] = useState(true);
   const [team, setTeam] = useState(null);
 
   const handleData = (data) => {
-    setData(data);
+    // setData(data);
     //if btnData is defined
     if (btnData) {
       btnData(data);
     }
-
-    
   };
   useEffect(() => {
     setTeam(teamName);

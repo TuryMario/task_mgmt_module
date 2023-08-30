@@ -19,6 +19,7 @@ export default function TeamOverView() {
     // console.log("team name is .....",teamname);
     const taskInfo = (data) => {
         setTaskData(data);
+        console.log("Dt ...",data);
     }
     return (
         <>
