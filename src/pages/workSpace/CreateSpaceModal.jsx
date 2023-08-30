@@ -89,6 +89,7 @@ export default function CreateSpaceModal(props) {
                     placeholder="space_name"
                     value={data.spaceName}
                     onChange={handleOnChange}
+                    
                     required
                   />
                   <div className="text-danger">{nameError}</div>

@@ -64,9 +64,9 @@ export const spaces = [
   },
   {
     "id": "10",
-    "spaceName": "Technology Research",
+    "spaceName": "Tech Research",
     "type": "Project",
-    "spaceDescription": "Explore and evaluate new technologies, tools, and methodologies that can enhance the software development process.",
+    "spaceDescription": "Explore and evaluate new technologies, tools, and methodologies for enhancing software development.",
     "createDate": "2023-08-29"
   }
-]
+];

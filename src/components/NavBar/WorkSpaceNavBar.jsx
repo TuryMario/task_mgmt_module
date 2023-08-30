@@ -3,22 +3,27 @@ import { Container, Navbar } from "react-bootstrap";
 import CreateButton from "./CreateButton";
 import { useState } from "react";
 
-function WorkSpaceNavBar({ spaceHead,btn,teamName, btnData }) {
+function WorkSpaceNavBar({ spaceHead, btn, teamName, btnData }) {
   const [data, setData] = useState([]);
   const [buttonShow, setButtonShow] = useState(true);
   const [team, setTeam] = useState(null);
 
   const handleData = (data) => {
     setData(data);
+    //if btnData is defined
+    if (btnData) {
+      btnData(data);
+    }
+
+    
   };
   useEffect(() => {
     setTeam(teamName);
   }, [teamName]);
   useEffect(() => {
     setButtonShow(btn);
-  },[btn]);
+  }, [btn]);
 
-  btnData=data;
   return (
     <div>
       <Navbar className="bg-body-tertiary mb-4">

@@ -41,14 +41,18 @@ function WorkSpaceBody({ fromWorkSpace, toggle, teamInfo }) {
         <Row xs={3} md={3} className="g-4">
           {cards.map((card, index) => (
             <Col key={index}>
-              <Card border="info" className="text-center">
+              <Card
+                border="info"
+                className="text-center"
+                style={{ height: "400px" }}
+              >
                 <Card.Body>
                   <div
                     style={{
-                      height: "100px",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
+                      height: "80px",
                     }}
                   >
                     <div
@@ -68,7 +72,7 @@ function WorkSpaceBody({ fromWorkSpace, toggle, teamInfo }) {
                     </div>
                   </div>
                   <h2>{card.spaceName}</h2>
-                  <h5>Space Category</h5>
+                  <h5>Space Description</h5>
                   <p>
                     <em>{card.spaceDescription}</em>
                   </p>
