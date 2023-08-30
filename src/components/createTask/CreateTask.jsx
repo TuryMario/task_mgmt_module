@@ -63,6 +63,7 @@ export default function CreateTask({showModal, onTaskCreate, onHide}) {
                                         value={taskInput.priority}
                                         onChange={(e)=>{setTaskInput({...taskInput, priority: e.target.value})}}
                                     >
+                                        <option>--Select--</option>
                                         <option>High</option>
                                         <option>Medium</option>
                                         <option>Low</option>

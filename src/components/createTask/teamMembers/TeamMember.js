@@ -62,7 +62,8 @@ export default function TeamMember({ teams, setTeams }) {
     };
 
     const handleAddSelectedMember = () => {
-        if (selectedMember && selectedTeamIndex !== null) {
+        const addedMember = selectedMember?.name;
+        if (addedMember) {
             const updatedTeams = teams.map((team, index) => {
                 if (index === selectedTeamIndex) {
                     return {

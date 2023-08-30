@@ -18,7 +18,6 @@ const SearchBar = ({ onSearch, onClose, onSelectMember, searchResults }) => {
     const handleMemberSelect = member => {
         onSelectMember(member);
         setSearchQuery('');
-        onClose(); // Close the search bar after selecting a member
         console.log(member);
     };
 
