@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import {Button, Card, Modal} from 'react-bootstrap';
+import { Button, Modal } from 'react-bootstrap';
 import SearchBar from '../../../pages/teams/SearchBar';
 import { Table } from "@mui/material";
 
@@ -62,8 +62,7 @@ export default function TeamMember({ teams, setTeams }) {
     };
 
     const handleAddSelectedMember = () => {
-        const addedMember = selectedMember !== null && selectedMember !== undefined
-        if (addedMember) {
+        if (selectedMember && selectedTeamIndex !== null) {
             const updatedTeams = teams.map((team, index) => {
                 if (index === selectedTeamIndex) {
                     return {
@@ -77,7 +76,6 @@ export default function TeamMember({ teams, setTeams }) {
             setAddedMembers([...addedMembers, selectedMember]); // Add selected member to addedMembers
             handleSearchClose();
         }
-        return selectedMember?.name || '';
     };
 
 
@@ -127,7 +125,7 @@ export default function TeamMember({ teams, setTeams }) {
                     />
                     {selectedMember ? (
                         <div>
-                            <Card className="mt-2"  style={{ backgroundColor: '#EAF2F8' }}><strong>Selected Member:</strong> {selectedMember.name}</Card>
+                            Selected Member: {selectedMember.name}
                             <Button onClick={handleAddSelectedMember}>Add Selected Member</Button>
                         </div>
                     ) : null}

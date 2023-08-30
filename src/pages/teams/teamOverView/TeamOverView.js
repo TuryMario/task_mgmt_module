@@ -8,9 +8,14 @@ import { Button } from "react-bootstrap";
 import TaskListTable from "../../../components/taskListTable/TaskListTable";
 import CreateTask from "../../../components/createTask/CreateTask";
 import TeamMember from "../../../components/createTask/teamMembers/TeamMember";
+import WorkSpaceNavBar from '../../../components/NavBar/WorkSpaceNavBar';
+import { useParams } from "react-router-dom";
+
 
 
 export default function TeamOverView() {
+    const { teamname } = useParams();
+
     const [taskModalShow, setTaskModalShow] = useState(false);
     const [tasks, setTasks] = useState([]);
 
@@ -21,7 +26,7 @@ export default function TeamOverView() {
 
     return (
         <>
-            
+            <WorkSpaceNavBar teamName={teamname} btn={false} spaceHead={teamname} />
             <div>
                 <Container>
                     <TeamMember />
