@@ -30,89 +30,89 @@ export default function TaskListTable({ taskListData }) {
   };
 
   const columns = useMemo(
-    () => [
-      {
-        accessorKey: "name",
-        header: "Title",
-        size: 200,
-        Header: <span style={{ color: "blue" }}>Title</span>,
-      },
-      {
-        accessorKey: "priority",
-        header: "Task Priority",
-        size: 200,
-        Header: <span style={{ color: "blue" }}>Priority</span>,
-      },
-      {
-        accessorKey: "description",
-        header: "Description",
-        size: 200,
-        Header: <span style={{ color: "blue" }}>Description</span>,
-      },
-      {
-        accessorKey: "comment",
-        header: "Key Note/Comment",
-        size: 200,
-        Header: <span style={{ color: "blue" }}>Key Note/Comment</span>,
-      },
-      {
-        accessorKey: "startDate",
-        header: "Start Date",
-        size: 200,
-        Header: <span style={{ color: "blue" }}>Start Date</span>,
-      },
-      {
-        accessorKey: "dueDate",
-        header: "Due Date",
-        size: 200,
-        Header: <span style={{ color: "blue" }}>Due Date</span>,
-      },
-    ],
-    []
+      () => [
+        {
+          accessorKey: "name",
+          header: "Title",
+          size: 200,
+          Header: <span style={{ color: "blue" }}>Title</span>,
+        },
+        {
+          accessorKey: "priority",
+          header: "Task Priority",
+          size: 200,
+          Header: <span style={{ color: "blue" }}>Priority</span>,
+        },
+        {
+          accessorKey: "description",
+          header: "Description",
+          size: 200,
+          Header: <span style={{ color: "blue" }}>Description</span>,
+        },
+        {
+          accessorKey: "comment",
+          header: "Key Note/Comment",
+          size: 200,
+          Header: <span style={{ color: "blue" }}>Key Note/Comment</span>,
+        },
+        {
+          accessorKey: "startDate",
+          header: "Start Date",
+          size: 200,
+          Header: <span style={{ color: "blue" }}>Start Date</span>,
+        },
+        {
+          accessorKey: "dueDate",
+          header: "Due Date",
+          size: 200,
+          Header: <span style={{ color: "blue" }}>Due Date</span>,
+        },
+      ],
+      []
   );
 
   return (
-    <>
-      <div>
+      <>
         <div>
-          <MaterialReactTable
-            columns={columns}
-            data={tableData}
-            initialState={{ density: "compact" }}
-            enableDensityToggle={false}
-            renderTopToolbarCustomActions={() => <h3>Tasks Table</h3>}
-            editingMode="row"
-            enableEditing
-            onEditingRowSave={handleSaveRow}
-            muiTablePaginationProps={{
-              rowsPerPageOptions: [5, 10],
-            }}
-            onRowClick={handleRowClick}
-          />
+          <div>
+            <MaterialReactTable
+                columns={columns}
+                data={taskListData}
+                initialState={{ density: "compact" }}
+                enableDensityToggle={false}
+                renderTopToolbarCustomActions={() => <h3>Tasks Table</h3>}
+                editingMode="row"
+                enableEditing
+                onEditingRowSave={handleSaveRow}
+                muiTablePaginationProps={{
+                  rowsPerPageOptions: [5, 10],
+                }}
+                onRowClick={handleRowClick}
+            />
+          </div>
+          <div>
+            <Modal
+                show={show}
+                onHide={handleClose}
+                backdrop="static"
+                keyboard={false}
+            >
+              <Modal.Header closeButton>
+                <Modal.Title>Task Details</Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                {/* Passing the selected row data */}
+                <MainTaskDetailsPage rowData={selectedRow} />{" "}
+              </Modal.Body>
+              <Modal.Footer>
+                <Button variant="secondary" onClick={handleClose}>
+                  Close
+                </Button>
+                <Button variant="primary">Understood</Button>
+              </Modal.Footer>
+            </Modal>
+          </div>
         </div>
-        <div>
-          <Modal
-            show={show}
-            onHide={handleClose}
-            backdrop="static"
-            keyboard={false}
-          >
-            <Modal.Header closeButton>
-              <Modal.Title>Task Details</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-              {/* Passing the selected row data */}
-              <MainTaskDetailsPage rowData={selectedRow} />{" "}
-            </Modal.Body>
-            <Modal.Footer>
-              <Button variant="secondary" onClick={handleClose}>
-                Close
-              </Button>
-              <Button variant="primary">Understood</Button>
-            </Modal.Footer>
-          </Modal>
-        </div>
-      </div>
-    </>
+      </>
   );
 }
