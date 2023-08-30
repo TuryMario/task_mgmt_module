@@ -26,6 +26,7 @@ export default function TaskListTable({ taskListData }) {
 
   const handleRowClick = (row) => {
     setSelectedRow(row);
+    setShow(true);
     handleShow();
   };
 

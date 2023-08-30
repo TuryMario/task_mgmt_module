@@ -18,18 +18,23 @@ export default function TeamOverView() {
 
     const [taskModalShow, setTaskModalShow] = useState(false);
     const [tasks, setTasks] = useState([]);
+    const [memberAvailable,setMemberAvailable] = useState([])
 
     const addNewTask = (newTask) => {
         setTasks([...tasks, newTask]);
         setTaskModalShow(false);
     };
+    const availableMembers =(data)=>{
+        setMemberAvailable([...memberAvailable, data]);
+    }
+    console.log("available member...",memberAvailable)
 
     return (
         <>
             <WorkSpaceNavBar teamName={teamname} btn={false} spaceHead={teamname} />
             <div>
                 <Container>
-                    <TeamMember />
+                    <TeamMember availableMembers={availableMembers} />
                 </Container>
             </div>
             <div className='mt-3'>
@@ -40,7 +45,7 @@ export default function TeamOverView() {
 
                         <Col sm={4}>
                             <Button variant="outline-primary" className="mb-2" onClick={() => setTaskModalShow(true)}>Add Task</Button>
-                            <CreateTask showModal={taskModalShow} onTaskCreate={addNewTask} onHide={(() => setTaskModalShow(false))} />
+                            <CreateTask memberAvailable={memberAvailable} showModal={taskModalShow} onTaskCreate={addNewTask} onHide={(() => setTaskModalShow(false))} />
                         </Col>
                     </Row>
                 </Container>
@@ -48,7 +53,7 @@ export default function TeamOverView() {
                     <Row>
                         <Col>
 
-                            <TaskListTable taskListData={tasks} />
+                            <TaskListTable  taskListData={tasks} />
                         </Col>
                     </Row>
                 </Container>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -29,8 +29,8 @@ const membersList = [
     { id: 20, name: 'Oliver Martinez' },
 ];
 
-export default function TeamMember({ teams, setTeams }) {
-    const [showSearchBarModal, setShowSearchBarModal] = useState(false);
+export default function TeamMember({ teams, setTeams , availableMembers}) {
+    const [showSearchBarModal   , setShowSearchBarModal] = useState(false);
     const [selectedTeamIndex, setSelectedTeamIndex] = useState(null);
     const [selectedMember, setSelectedMember] = useState(null);
     const [searchResults, setSearchResults] = useState([]); // Initialize searchResults state
@@ -38,6 +38,7 @@ export default function TeamMember({ teams, setTeams }) {
 
     const handleAddMemberClick = (teamIndex) => {
         setSelectedTeamIndex(teamIndex);
+        console.log(selectedTeamIndex)
         setShowSearchBarModal(true);
     };
 
@@ -60,6 +61,9 @@ export default function TeamMember({ teams, setTeams }) {
     const handleMemberSelect = (member) => {
         setSelectedMember(member);
     };
+    const handleMembers = (data) => {
+        setAddedMembers([...addedMembers, data]);
+    }
 
     const handleAddSelectedMember = () => {
         if (selectedMember && selectedTeamIndex !== null) {
@@ -77,17 +81,20 @@ export default function TeamMember({ teams, setTeams }) {
             handleSearchClose();
         }
     };
+    useEffect(()=>{
+        availableMembers(addedMembers)
+    },[addedMembers]);
 
 
     return (
         <>
             <Container>
-                <Row>
+                <Row >
                     <h3>1. <strong> Members</strong></h3>
                     <hr/>
                     <Col sm={4}>
                         <Button variant="outline-primary" onClick={handleAddMemberClick}>Add Member </Button>
-                        {addedMembers.length >= 0 && (
+                        {addedMembers.length > 0 && (
                             <div>
                                 <h5 className='mt-2'>Available Members List</h5>
                                 <Table>
@@ -117,18 +124,19 @@ export default function TeamMember({ teams, setTeams }) {
                 </Modal.Header>
                 <Modal.Body>
                     <SearchBar
+                        members={handleMembers}
                         onClose={handleSearchClose}
                         onSearch={handleSearch}
                         onSelectMember={handleMemberSelect}
                         membersList={membersList}
                         searchResults={searchResults}
                     />
-                    {selectedMember ? (
-                        <div>
-                            Selected Member: {selectedMember.name}
-                            <Button onClick={handleAddSelectedMember}>Add Selected Member</Button>
-                        </div>
-                    ) : null}
+                    {/*{selectedMember ? (*/}
+                    {/*    <div>*/}
+                    {/*        Selected Member: {selectedMember.name}*/}
+                    {/*        <Button onClick={handleAddSelectedMember}>Add Selected Member</Button>*/}
+                    {/*    </div>*/}
+                    {/*) : null}*/}
                 </Modal.Body>
             </Modal>
             <br />

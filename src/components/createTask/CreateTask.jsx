@@ -3,22 +3,34 @@ import React, {useEffect, useState} from 'react';
 import {Button, Form, Modal} from "react-bootstrap";
 import Stack from "react-bootstrap/Stack";
 
-export default function CreateTask({showModal, onTaskCreate, onHide}) {
-
+export default function CreateTask({showModal, onTaskCreate, memberAvailable, onHide}) {
+    const [presentMembers, setPresentMembers] = useState([]);
     const [taskInput, setTaskInput] = useState({
         name: "",
         priority: "",
+        // presentMember:{
+        //     id:"",
+        //     name:"",
+        // },
         description: "",
         comment: "",
         startDate: "",
         dueDate: ""
     });
+    useEffect(() => {
+        setPresentMembers(memberAvailable);
+    }, [memberAvailable]);
+    console.log("Member Available",presentMembers)
 
     const handleTaskCreate = () => {
         onTaskCreate(taskInput); // Notify the parent component about the new task
         setTaskInput({
             name: "",
             priority: "",
+            presentMember:{
+                id:"",
+                name:"",
+            },
             description: "",
             comment: "",
             startDate: "",
@@ -31,6 +43,10 @@ export default function CreateTask({showModal, onTaskCreate, onHide}) {
             setTaskInput({
                 name: "",
                 priority: "",
+                presentMember:{
+                    id:"",
+                    name:"",
+                },
                 description: "",
                 comment: "",
                 startDate: "",
@@ -72,6 +88,27 @@ export default function CreateTask({showModal, onTaskCreate, onHide}) {
                                     </Form.Select>
                                 </Form.Group>
                             </div>
+                            <div>
+                                <Form.Group>
+                                    <Form.Label><strong>Attach Member</strong></Form.Label>
+                                    <Form.Select
+                                        size="md"
+                                        style={{ backgroundColor: "#EAF2F8"}}
+                                        value={taskInput.presentMember}
+                                        onChange={(e) => setTaskInput({...taskInput, presentMember: e.target.value})}
+                                    >
+                                        <option>--Select--</option>
+                                        {presentMembers.map((presentMember, index) => (
+                                            //
+                                            <li key={index} value={presentMember.id}>
+                                                {presentMember.name}
+                                                {console.log("member group",presentMember.name)}
+                                            </li>
+                                        ))}
+                                    </Form.Select>
+                                </Form.Group>
+                            </div>
+
                             <div>
                                 <Form.Group>
                                     <Form.Label><strong>Description</strong></Form.Label>

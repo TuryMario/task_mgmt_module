@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Form, Button, Card } from 'react-bootstrap';
 
-const SearchBar = ({ onSearch, onClose, onSelectMember, searchResults }) => {
+const SearchBar = ({ onSearch, onClose, onSelectMember, members, searchResults }) => {
     const [searchQuery, setSearchQuery] = useState('');
 
     const handleInputChange = event => {
@@ -16,6 +16,8 @@ const SearchBar = ({ onSearch, onClose, onSelectMember, searchResults }) => {
     };
 
     const handleMemberSelect = member => {
+        // console.log(member)
+        members(member)
         onSelectMember(member);
         setSearchQuery('');
         console.log(member);
@@ -37,7 +39,8 @@ const SearchBar = ({ onSearch, onClose, onSelectMember, searchResults }) => {
                 {/* Example: */}
                 <ul className="mt-2 memberList" style={{ backgroundColor: "#EAF2F8"}}>
                     {searchResults.map(member => (
-                        <li key={member.id} onClick={() => handleMemberSelect(member)}>
+                        <li key={member.id} onClick={() => handleMemberSelect(member)}
+                        >
                             {member.id}{" "} {" "}{member.name}
                         </li>
                     ))}
