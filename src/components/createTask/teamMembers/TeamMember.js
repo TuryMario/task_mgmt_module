@@ -84,7 +84,7 @@ export default function TeamMember({ teams, setTeams , availableMembers}) {
     };
     useEffect(()=>{
         availableMembers(addedMembers)
-    },[addedMembers]);
+    },[addedMembers, availableMembers]);
 
 
     return (
