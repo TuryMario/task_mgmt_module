@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import {Button, Card, Modal} from 'react-bootstrap';
+import {Button, Modal} from 'react-bootstrap';
 import SearchBar from '../../../pages/teams/SearchBar';
 import { Table } from "@mui/material";
 
@@ -29,28 +29,23 @@ const membersList = [
     { id: 20, name: 'Oliver Martinez' },
 ];
 
-export default function TeamMember({ teams, setTeams , availableMembers}) {
+export default function TeamMember({ availableMembers }) {
     const [showSearchBarModal   , setShowSearchBarModal] = useState(false);
-    const [selectedTeamIndex, setSelectedTeamIndex] = useState(null);
     const [selectedMember, setSelectedMember] = useState(null);
     const [searchResults, setSearchResults] = useState([]); // Initialize searchResults state
     const [addedMembers, setAddedMembers] = useState([]);
 
-    const handleAddMemberClick = (teamIndex) => {
-        setSelectedTeamIndex(teamIndex);
+    const handleAddMemberClick = () => {
         setShowSearchBarModal(true);
     };
 
     const handleSearchClose = () => {
         setShowSearchBarModal(false);
-        setSelectedTeamIndex(null);
         setSelectedMember(null);
         setSearchResults([]); // Reset search results when closing
     };
 
     const handleSearch = (query) => {
-        // Handle search logic and update searchResults
-        // For this example, let's assume you have a list of members and filter them based on the query
         const filteredMembers = membersList.filter(member =>
             member.name.toLowerCase().includes(query.toLowerCase())
         );
@@ -64,24 +59,6 @@ export default function TeamMember({ teams, setTeams , availableMembers}) {
         setAddedMembers([...addedMembers, data]);
     }
 
-    const handleAddSelectedMember = () => {
-        const addedMember = selectedMember !== null && selectedMember !== undefined
-        if (addedMember) {
-            const updatedTeams = teams.map((team, index) => {
-                if (index === selectedTeamIndex) {
-                    return {
-                        ...team,
-                        members: [...team.members, selectedMember],
-                    };
-                }
-                return team;
-            });
-            setTeams(updatedTeams);
-            setAddedMembers([...addedMembers, selectedMember]); // Add selected member to addedMembers
-            handleSearchClose();
-        }
-        return selectedMember?.name || '';
-    };
     useEffect(()=>{
         availableMembers(addedMembers)
     },[addedMembers, availableMembers]);
@@ -132,16 +109,9 @@ export default function TeamMember({ teams, setTeams , availableMembers}) {
                         membersList={membersList}
                         searchResults={searchResults}
                     />
-                    {selectedMember ? (
-                        <div>
-                            <Card className="mt-2"  style={{ backgroundColor: '#EAF2F8' }}><strong>Selected Member:</strong> {selectedMember.name}</Card>
-                            <Button onClick={handleAddSelectedMember}>Add Selected Member</Button>
-                        </div>
-                    ) : null}
                 </Modal.Body>
             </Modal>
             <br />
-
         </>
     );
 }
