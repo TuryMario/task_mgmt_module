@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import { Button, Modal } from 'react-bootstrap';
+import {Button, Card, Modal} from 'react-bootstrap';
 import SearchBar from '../../../pages/teams/SearchBar';
 import { Table } from "@mui/material";
 
@@ -38,7 +38,6 @@ export default function TeamMember({ teams, setTeams , availableMembers}) {
 
     const handleAddMemberClick = (teamIndex) => {
         setSelectedTeamIndex(teamIndex);
-        console.log(selectedTeamIndex)
         setShowSearchBarModal(true);
     };
 
@@ -66,7 +65,8 @@ export default function TeamMember({ teams, setTeams , availableMembers}) {
     }
 
     const handleAddSelectedMember = () => {
-        if (selectedMember && selectedTeamIndex !== null) {
+        const addedMember = selectedMember !== null && selectedMember !== undefined
+        if (addedMember) {
             const updatedTeams = teams.map((team, index) => {
                 if (index === selectedTeamIndex) {
                     return {
@@ -80,6 +80,7 @@ export default function TeamMember({ teams, setTeams , availableMembers}) {
             setAddedMembers([...addedMembers, selectedMember]); // Add selected member to addedMembers
             handleSearchClose();
         }
+        return selectedMember?.name || '';
     };
     useEffect(()=>{
         availableMembers(addedMembers)
@@ -131,12 +132,12 @@ export default function TeamMember({ teams, setTeams , availableMembers}) {
                         membersList={membersList}
                         searchResults={searchResults}
                     />
-                    {/*{selectedMember ? (*/}
-                    {/*    <div>*/}
-                    {/*        Selected Member: {selectedMember.name}*/}
-                    {/*        <Button onClick={handleAddSelectedMember}>Add Selected Member</Button>*/}
-                    {/*    </div>*/}
-                    {/*) : null}*/}
+                    {selectedMember ? (
+                        <div>
+                            <Card className="mt-2"  style={{ backgroundColor: '#EAF2F8' }}><strong>Selected Member:</strong> {selectedMember.name}</Card>
+                            <Button onClick={handleAddSelectedMember}>Add Selected Member</Button>
+                        </div>
+                    ) : null}
                 </Modal.Body>
             </Modal>
             <br />
