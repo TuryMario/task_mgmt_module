@@ -8,9 +8,9 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import { Container } from "react-bootstrap";
 
-function MainTaskDetailsPage({ rowData }) {
+function MainTaskDetailsPage({  }) {
 
-  const { name, priority, description, comment, startDate, endDate, status } = rowData;
+  // const { name, priority, description, comment, startDate, endDate, status } = rowData;
 
   return (
     <>
@@ -33,14 +33,9 @@ function MainTaskDetailsPage({ rowData }) {
             </Col>
 
             <Col>
-              <Card style={{ height:"904 px", position:"fixed"}}>
-                <Card.Body>
-                  <Card.Title>Comments</Card.Title>
-                  <Card.Text>
+              
                     <TaskMessaging />
-                  </Card.Text>
-                </Card.Body>
-              </Card>
+                  
             </Col>
           </Row>
         </Card>
