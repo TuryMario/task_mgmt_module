@@ -9,6 +9,7 @@ export default function TaskListTable({ taskListData }) {
   const [tableData, setTableData] = useState([]);
   const [selectedRow, setSelectedRow] = useState(null);
   const [show, setShow] = useState(false);
+  const [taskName, setTaskName] = useState("");
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -25,10 +26,12 @@ export default function TaskListTable({ taskListData }) {
   };
 
   const handleRowClick = (row) => {
-    setSelectedRow(row); 
+    setSelectedRow(row);
+    setTaskName(row.name);
     setShow(true);
     handleShow();
-    console.log("data is...", row);
+
+    // console.log("data is...", row.name);
   };
   const columns = useMemo(
     () => [
@@ -105,20 +108,26 @@ export default function TaskListTable({ taskListData }) {
             onHide={handleClose}
             backdrop="static"
             keyboard={false}
-            style={{ width: "100%" }}
+            // style={{ width: "100%" }}
+            size="xl"
+            // fullscreen
+            // dialogClassName="modal-90w"
           >
             <Modal.Header closeButton>
-              <Modal.Title>Task Details</Modal.Title>
+              <Modal.Title>
+                <h4>
+                  Task Details. 
+                </h4>
+              </Modal.Title>
             </Modal.Header>
             <Modal.Body>
-              {/* Passing the selected row data */}
               <MainTaskDetailsPage rowData={selectedRow} />{" "}
             </Modal.Body>
             <Modal.Footer>
-              <Button variant="secondary" onClick={handleClose}>
+              <Button variant="outline-secondary" onClick={handleClose}>
                 Close
               </Button>
-              <Button variant="primary">Understood</Button>
+              {/* <Button variant="primary">Understood</Button> */}
             </Modal.Footer>
           </Modal>
         </div>

@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useState } from "react";
 
 import TaskStatusDetails from "./taskStatusDetails/TaskStatusDetails";
 import TaskMessaging from "./taskMessaging/TaskMessaging";
@@ -10,23 +11,37 @@ import { Container } from "react-bootstrap";
 
 function MainTaskDetailsPage({ rowData }) {
   // const { } = rowData;
-
-
+  const row = rowData;
+  // console.log("Row data is..",row);
+  // useEffect(() => {
+  //   setRow(rowData);
+  // }, [rowData]);
   return (
     <>
-      <Container style={{ margin: "10px" }}>
-        <Card style={{ width: "90%" }}>
+      <Container>
+        <Card>
           <Card.Header>
-            <h2>Task Name</h2>
+            <h3>
+              Task Name :
+              <span style={{ color: "blue" }}>{row.name}</span>
+            </h3>
           </Card.Header>
           <Row style={{ margin: "10px 5px 10px 5px" }}>
             <Col>
               <Card>
-                <Card.Img variant="top" src="holder.js/100px160" />
+                <Card.Header>
+                  <Card.Img
+                    style={{ height: "20px", maxHeight: "20px" }}
+                    variant="top"
+                    alt=" Task Image"
+                    src="/logo192.png"
+                  />
+                </Card.Header>
+
                 <Card.Body>
                   {/*<Card.Title>Card title</Card.Title>*/}
                   <Card.Text>
-                    <TaskStatusDetails />
+                    <TaskStatusDetails row={row} />
                   </Card.Text>
                 </Card.Body>
               </Card>
