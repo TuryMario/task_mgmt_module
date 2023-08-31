@@ -30,14 +30,9 @@ function MainTaskDetailsPage() {
             </Col>
 
             <Col>
-              <Card style={{ height:"904 px", position:"fixed"}}>
-                <Card.Body>
-                  <Card.Title>Comments</Card.Title>
-                  <Card.Text>
+              
                     <TaskMessaging />
-                  </Card.Text>
-                </Card.Body>
-              </Card>
+                  
             </Col>
           </Row>
         </Card>
