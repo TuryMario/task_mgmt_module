@@ -8,7 +8,7 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import { Container } from "react-bootstrap";
 
-function MainTaskDetailsPage({  }) {
+function MainTaskDetailsPage() {
 
   // const { name, priority, description, comment, startDate, endDate, status } = rowData;
 
