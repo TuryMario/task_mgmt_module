@@ -20,7 +20,7 @@ export default function CreateTask({showModal, onTaskCreate, memberAvailable, on
     useEffect(() => {
         setPresentMembers(memberAvailable);
     }, [memberAvailable]);
-    console.log("Member Available",presentMembers)
+    // console.log("Member Available",presentMembers)
 
     const handleTaskCreate = () => {
         onTaskCreate(taskInput); // Notify the parent component about the new task
@@ -102,7 +102,7 @@ export default function CreateTask({showModal, onTaskCreate, memberAvailable, on
                                             //
                                             <li key={index} value={presentMember.id}>
                                                 {presentMember.name}
-                                                {console.log("member group",presentMember.name)}
+                                                {/* {console.log("member group",presentMember.name)} */}
                                             </li>
                                         ))}
                                     </Form.Select>

@@ -18,16 +18,16 @@ export default function TeamOverView() {
 
     const [taskModalShow, setTaskModalShow] = useState(false);
     const [tasks, setTasks] = useState([]);
-    const [memberAvailable,setMemberAvailable] = useState([])
+    const [memberAvailable, setMemberAvailable] = useState([])
 
     const addNewTask = (newTask) => {
         setTasks([...tasks, newTask]);
         setTaskModalShow(false);
     };
-    const availableMembers =(data)=>{
+    const availableMembers = (data) => {
         setMemberAvailable([...memberAvailable, data]);
     }
-    console.log("available member...",memberAvailable)
+    // console.log("available member...",memberAvailable)
 
     return (
         <>
@@ -53,7 +53,7 @@ export default function TeamOverView() {
                     <Row>
                         <Col>
 
-                            <TaskListTable  taskListData={tasks} />
+                            <TaskListTable taskListData={tasks} />
                         </Col>
                     </Row>
                 </Container>

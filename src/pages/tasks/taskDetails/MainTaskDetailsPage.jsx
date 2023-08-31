@@ -8,14 +8,14 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import { Container } from "react-bootstrap";
 
-function MainTaskDetailsPage() {
+function MainTaskDetailsPage({ rowData }) {
+  // const { } = rowData;
 
-  // const { name, priority, description, comment, startDate, endDate, status } = rowData;
 
   return (
     <>
       <Container style={{ margin: "10px" }}>
-        <Card>
+        <Card style={{ width: "90%" }}>
           <Card.Header>
             <h2>Task Name</h2>
           </Card.Header>
@@ -33,9 +33,7 @@ function MainTaskDetailsPage() {
             </Col>
 
             <Col>
-              
-                    <TaskMessaging />
-                  
+              <TaskMessaging />
             </Col>
           </Row>
         </Card>
