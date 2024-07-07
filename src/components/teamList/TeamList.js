@@ -10,9 +10,6 @@ const TeamList = ({ teams, setTeams, handleAddMemberClick }) => {
     useEffect(() => {
         setTeamData(teams)
     }, [teams]);
-    // console.log("Teams are..", teams);
-    // console.log("SetTeams are..", setTeams);
-    // console.log("Teams are..", teams);
 
     const handleDeleteTeam = (index) => {
         const updatedTeams = teamData.filter((team, teamIndex) => teamIndex !== index);
@@ -77,5 +74,4 @@ const TeamList = ({ teams, setTeams, handleAddMemberClick }) => {
         </>
     );
 };
-
 export default TeamList;
